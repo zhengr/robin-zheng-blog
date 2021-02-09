@@ -4,9 +4,9 @@
 
 # Site
 title: Robin's blog
-subtitle:
+subtitle: '创新之链'
 description:
-keywords:
+keywords: 人工智能,大数据,云计算,区块链
 author: Robin Zheng
 language: zh-CN # or zh-CN or en
 timezone:
@@ -14,8 +14,8 @@ timezone:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
 #url: https://haojen.github.io/Claudia-theme-blog/
-url: http://example.com
-root: /Claudia-theme-blog/
+url: https://blog.eeic.com.cn/
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
