@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: John Doe's blog
+title: Robin's blog
 subtitle:
 description:
 keywords:
-author: John Doe
-language: en # or zh-CN
+author: Robin Zheng
+language: zh-CN # or zh-CN or en
 timezone:
 
 # URL
