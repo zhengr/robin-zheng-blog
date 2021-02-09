@@ -17,19 +17,19 @@ social:
   facebook: /
   linkedin:
   instagram: /
-  github: haojen
+  github: zhengr
 
 user:
-  name: Haojen
+  name: Robin
   avatar: /images/avatar.jpg
-  location: In the dust
-  description: May the Force be with you
+  location: Beijing
+  description: 观天之道，执天之行
 
 # documents: https://github.com/utterance/utterances
 # API config: https://utteranc.es/
 comment_utteranc:
   enable: true
-  repo: Haojen/Claudia-theme-blog # your blog repo
+  repo: zhengr/Claudia-theme-blog # your blog repo
 
 # dark
 # light
