@@ -2,22 +2,20 @@
 title: 纷美包装ERP系统二期海外成功上线运营
 date: 2016-10-04 00:00:00
 author: robin zheng
-img: https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/AGV.jpg
+img: https://i.loli.net/2021/02/09/LPyev8cnAo6N4YQ.jpg
 categories: 套装软件
 tags:
   - Oracle
   - Greatview
   - ERP
 ---
-## 纷美包装ERP系统二期海外成功上线运营
-
 2015年集团进一步要求实现纷美集团整体数字化平台搭建， 将全集团国内、国际业务通过Global One Instance承载。2015年11月8日带领实施团队进驻纷美德国工厂，2015年11月10号二期项目正式拉开帷幕。 
 
 与一期不同，欧洲项目实施细节要求更多，自动化程度更高，我们也尝试将一部分工业4.0的概念植入此次实施，例如与MES， AGV系统的集成。并进一步细化管理，采用单卷，单品，半成品，多维度成本核算。
 
-![kickoff](https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/kickoff.PNG)
+![Kickoff](https://i.loli.net/2021/02/09/KPoH1tm5hIUAjq4.png)
 
-![AGV](https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/AGV.jpg)
+![AGV](https://i.loli.net/2021/02/09/LPyev8cnAo6N4YQ.jpg)
 
 > 2016年10月，纷美包装ERP二期系统正式上线，自此纷美国内、国际生产、运营系统全部打通，集团实现财务业务一体化的精准管理模式，标志着纷美集团全面进入数字化运营阶段，推动纷美全球业务的信息化步伐。
 >
@@ -27,6 +25,6 @@ tags:
 >
 > 无论德国工业4.0还是中国制造2025战略，都是旨在提升国家制造业智能化水平的国家竞争策略。纷美集团ERP系统的全面上线不仅是纷美数字化战略的里程碑之一，也使纷美成为中国制造业向中国制造2025迈进的先锋实践者。
 
-![golive1](https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/golive1.jpg)
+![Golive1](https://i.loli.net/2021/02/09/sWHQizGB7DhjX1d.jpg)
 
-![golive2](https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/golive2.jpg)
+![Golive2](https://i.loli.net/2021/02/09/KBJuZwr67TdxCe2.jpg)
