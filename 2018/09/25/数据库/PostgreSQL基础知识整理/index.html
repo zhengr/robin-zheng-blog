@@ -1,0 +1,280 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>PostgreSQL基础知识整理</title><meta name="description" content="观天之道，执天之行"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Robin's blog" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Robin's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">PostgreSQL基础知识整理</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9CDML"><span class="toc-text">数据库操作DML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CREATE-TABLE"><span class="toc-text">CREATE TABLE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONSTRAINT"><span class="toc-text">CONSTRAINT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ALTER-TABLE"><span class="toc-text">ALTER TABLE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DROP-TABLE"><span class="toc-text">DROP TABLE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TRUNCATE-TABLE"><span class="toc-text">TRUNCATE TABLE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE-FROM"><span class="toc-text">DELETE FROM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT-INTO"><span class="toc-text">INSERT INTO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UPDATE"><span class="toc-text">UPDATE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%9F%BA%E7%A1%80"><span class="toc-text">SQL基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SELECT"><span class="toc-text">SELECT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DISTINCT"><span class="toc-text">DISTINCT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WHERE"><span class="toc-text">WHERE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AND-OR"><span class="toc-text">AND &#x2F; OR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IN-NOT-IN"><span class="toc-text">IN &#x2F; NOT IN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BETWEEN-%E2%80%A6-AND-%E2%80%A6"><span class="toc-text">BETWEEN … AND …</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LIKE"><span class="toc-text">LIKE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ORDER-BY"><span class="toc-text">ORDER BY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GROUP-BY"><span class="toc-text">GROUP BY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HAVING"><span class="toc-text">HAVING</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ALIAS"><span class="toc-text">ALIAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E8%BF%9E%E6%8E%A5"><span class="toc-text">表连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%BF%9B%E9%98%B6"><span class="toc-text">SQL进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UNION-UNION-ALL"><span class="toc-text">UNION &#x2F; UNION ALL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INTERSECT-INTERSECT-ALL"><span class="toc-text">INTERSECT &#x2F; INTERSECT ALL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXCEPT-EXCEPT-ALL"><span class="toc-text">EXCEPT &#x2F; EXCEPT ALL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUBQUERY"><span class="toc-text">SUBQUERY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXISTS-NOT-EXISTS"><span class="toc-text">EXISTS &#x2F; NOT EXISTS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CONCATENATE"><span class="toc-text">CONCATENATE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUBSTRING"><span class="toc-text">SUBSTRING</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TRIM"><span class="toc-text">TRIM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CASE"><span class="toc-text">CASE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#COALESCE"><span class="toc-text">COALESCE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NULLIF"><span class="toc-text">NULLIF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GREATEST-LEAST"><span class="toc-text">GREATEST &#x2F; LEAST</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/PostgreSQL"><i class="tag post-item-tag">PostgreSQL</i></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93"><i class="tag post-item-tag">数据库</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">PostgreSQL基础知识整理</h1><time class="has-text-grey" datetime="2018-09-25T00:33:00.000Z">2018-09-25</time><article class="mt-2 post-content"><h2 id="数据库操作DML"><a href="#数据库操作DML" class="headerlink" title="数据库操作DML"></a>数据库操作DML</h2><h3 id="CREATE-TABLE"><a href="#CREATE-TABLE" class="headerlink" title="CREATE TABLE"></a>CREATE TABLE</h3><p><code>CREATE TABLE</code>语句用于创建数据库中的表。语法是：</p>
+<pre><code class="sql">CREATE TABLE 表名称 (
+列名1 数据类型,
+列名2 数据类型,
+列名3 数据类型,
+....
+);</code></pre>
+<p>例：</p>
+<pre><code class="sql">CREATE TABLE user (
+id integer,
+user_name varchar(255),
+email varchar(255),
+age integer,
+address varchar(255)
+)</code></pre>
+<p><strong>注意</strong>：字段类型<code>char</code>和<code>varchar</code>区别：</p>
+<ul>
+<li>容纳固定长度的字符串。</li>
+<li>容纳可变长度的字符串。</li>
+</ul>
+<h3 id="CONSTRAINT"><a href="#CONSTRAINT" class="headerlink" title="CONSTRAINT"></a>CONSTRAINT</h3><p>约束、限制，常见的约束如下：</p>
+<ul>
+<li><code>CHECK</code>(检查约束)</li>
+<li><code>NOT NULL</code>(非空约束)</li>
+<li><code>UNIQUE</code>(唯一约束)</li>
+<li><code>Primary Key</code>(主键)</li>
+<li><code>Foreign Key</code>(外键)</li>
+</ul>
+<p>例：</p>
+<pre><code class="sql">-- 各种约束的使用示例
+CREATE TABLE user (
+    id integer NOT NULL PRIMARY KEY,
+    corp_id integer REFERENCES corp (id),
+    user_name text UNIQUE,
+    age numeric CHECK (age &gt; 0)
+);</code></pre>
+<h3 id="ALTER-TABLE"><a href="#ALTER-TABLE" class="headerlink" title="ALTER TABLE"></a>ALTER TABLE</h3><p><code>ALTER TABLE</code>用来添加，删除或修改现有表中的列，也可以用来添加和删除现有表上的各种制约因素。语法如下：</p>
+<pre><code class="sql">-- 现有表中添加一个新的列
+ALTER TABLE table ADD column datatype;
+
+-- 现有表中删除一个新的列
+ALTER TABLE table DROP COLUMN column;
+
+-- 现有表中更改数据类型的列
+ALTER TABLE table MODIFY COLUMN column datatype;
+
+-- 现有表中一列添加NOT NULL约束
+ALTER TABLE table MODIFY column datatype NOT NULL;
+
+-- 现有表中添加唯一约束
+ALTER TABLE table ADD CONSTRAINT MyUniqueConstraint UNIQUE(column1, column2...);
+
+-- 现有表中添加CHECK约束
+ALTER TABLE table ADD CONSTRAINT MyUniqueConstraint CHECK (CONDITION);
+
+-- 现有表中添加PRIMARY KEY约束
+ALTER TABLE table ADD CONSTRAINT MyPrimaryKey PRIMARY KEY (column1, column2...);
+
+-- 现有表中删除约束
+ALTER TABLE table DROP CONSTRAINT MyUniqueConstraint;
+
+-- 现有表中删除主键
+ALTER TABLE table DROP CONSTRAINT MyPrimaryKey;</code></pre>
+<h3 id="DROP-TABLE"><a href="#DROP-TABLE" class="headerlink" title="DROP TABLE"></a>DROP TABLE</h3><p><code>DROP TABLE</code>语句是用来删除表定义及其所有相关的数据表的索引，规则，触发器和约束。语法如下：</p>
+<pre><code class="sql">DROP TABLE table;</code></pre>
+<h3 id="TRUNCATE-TABLE"><a href="#TRUNCATE-TABLE" class="headerlink" title="TRUNCATE TABLE"></a>TRUNCATE TABLE</h3><p><code>TRUNCATE TABLE</code>命令用于从现有的表删除完整的数据。在每个表上的DELETE（删除）具有相同的效果，但是，因为它没有实际扫描的表，它的速度快。语法如下：</p>
+<pre><code class="sql">TRUNCATE TABLE  table;</code></pre>
+<h3 id="DELETE-FROM"><a href="#DELETE-FROM" class="headerlink" title="DELETE FROM"></a>DELETE FROM</h3><p><code>DELETE FROM</code>用来从一个表中删除现有的记录。可以使用WHERE子句DELETE查询删除所选行，否则所有的记录会被删除。语法如下：</p>
+<pre><code class="sql">DELETE FROM table WHERE [condition];</code></pre>
+<h3 id="INSERT-INTO"><a href="#INSERT-INTO" class="headerlink" title="INSERT INTO"></a>INSERT INTO</h3><p><code>INSERT INTO</code>语句允许一个到一个表中插入新行。一个可以作为一个查询的结果，在一个时间或几行插入一行。基本语法如下：</p>
+<pre><code class="sql">INSERT INTO table (column1, column2, column3,...columnN)]
+VALUES (value1, value2, value3,...valueN);</code></pre>
+<blockquote>
+<p><strong>注</strong>：<br>1.这里 column1, column2,…columnN是要插入数据的表中的列名。<br>2. 可以以任何顺序列出目标列名。 VALUES子句或查询的值都与显式或隐式的列列表从左到右。</p>
+</blockquote>
+<p>如果要添加表中的所有列的值，可能不需要在SQL查询中指定列（次）名称。但要确保表中是在相同的顺序的列值的顺序。INSERT INTO语法如下：</p>
+<pre><code class="sql">INSERT INTO table VALUES (value1,value2,value3,...valueN);</code></pre>
+<h3 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h3><p><code>UPDATE</code>被用来修改现有的表中的记录。可以使用<code>UPDATE</code>查询的<code>WHERE</code>子句更新选定行，否则会被更新的所有行。基本语法如下：</p>
+<pre><code>UPDATE table SET column1 = value1, column2 = value2...., columnN = valueN WHERE [condition];</code></pre>
+<h2 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础"></a>SQL基础</h2><h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><pre><code class="sql">SELECT column FROM table;</code></pre>
+<h3 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h3><p>找出表内的不同值的情况。</p>
+<pre><code class="sql">SELECT DISTINCT column FROM table;</code></pre>
+<p>例：</p>
+<pre><code class="sql">SELECT DISTINCT id, email FROM user;</code></pre>
+<h3 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h3><pre><code class="sql">SELECT column FROM table WHERE [condition];</code></pre>
+<h3 id="AND-OR"><a href="#AND-OR" class="headerlink" title="AND / OR"></a>AND / OR</h3><pre><code class="sql">SELECT column FROM table WHERE [condition1] [AND|OR] [condition2];</code></pre>
+<h3 id="IN-NOT-IN"><a href="#IN-NOT-IN" class="headerlink" title="IN / NOT IN"></a>IN / NOT IN</h3><pre><code class="sql">SELECT column FROM table WHERE column IN (&#39;value1&#39;, &#39;value2&#39;, ...);</code></pre>
+<p>例：</p>
+<pre><code class="sql">SELECT * FROM user WHERE user_name IN (&#39;张三&#39;, &#39;李四&#39;);</code></pre>
+<h3 id="BETWEEN-…-AND-…"><a href="#BETWEEN-…-AND-…" class="headerlink" title="BETWEEN … AND …"></a>BETWEEN … AND …</h3><pre><code class="sql">SELECT column FROM table WHERE column BETWEEN &#39;value1&#39; AND &#39;value2&#39;;</code></pre>
+<p>例：</p>
+<pre><code class="sql">SELECT * FROM user WHERE age BETWEEN 18 AND 25;</code></pre>
+<h3 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h3><pre><code class="sql">SELECT column FROM table WHERE column LIKE &#123;模式&#125;;</code></pre>
+<p>例：</p>
+<pre><code class="sql">SELECT * FROM user WHERE user_name LIKE &#39;%张%&#39;;</code></pre>
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><pre><code class="sql">SELECT column FROM table [WHERE condition] ORDER BY column [ASC, DESC];</code></pre>
+<blockquote>
+<p><strong>注</strong>：ASC（默认）代表结果会以由小往大的顺序列出，而DESC代表结果会以由大往小的顺序列出。</p>
+</blockquote>
+<p>例：</p>
+<pre><code class="sql">SELECT user_name, email, age FROM user ORDER BY age DESC;</code></pre>
+<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><pre><code class="sql">SELECT column1, SUM(column2) FROM table GROUP BY column1;</code></pre>
+<p>例：</p>
+<pre><code class="sql">SELECT user_name, SUM(age) FROM user GROUP BY user_name;</code></pre>
+<h3 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h3><p>对函数产生的值来设定条件。</p>
+<pre><code class="sql">SELECT column1, SUM(column2) FROM table GROUP BY column1 HAVING [condition];</code></pre>
+<p>例：</p>
+<pre><code class="sql">SELECT user_name, SUM(ages) FROM user GROUP BY user_name HAVING SUM(age) &gt; 1500;</code></pre>
+<h3 id="ALIAS"><a href="#ALIAS" class="headerlink" title="ALIAS"></a>ALIAS</h3><blockquote>
+<p>SELECT ‘表别名’.’列名’ AS ‘列别名’ FROM table AS ‘表别名’;</p>
+</blockquote>
+<p>例：</p>
+<pre><code class="sql">SELECT u.user_name AS name, sum(age) ages FROM user AS u GROUP BY u.store_name;</code></pre>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li><code>AVG</code> (平均)</li>
+<li><code>COUNT</code> (计数)</li>
+<li><code>MAX</code> (最大值)</li>
+<li><code>MIN</code> (最小值)</li>
+<li><code>SUM</code> (总合)</li>
+</ul>
+<pre><code class="sql">SELECT fun_name(column) FROM table;</code></pre>
+<p>例：</p>
+<pre><code class="sql">SELECT count(u.id) AS user_count FROM user AS u;</code></pre>
+<h3 id="表连接"><a href="#表连接" class="headerlink" title="表连接"></a>表连接</h3><p>INNER JOIN: 如果表中有至少一个匹配，则返回行；<br>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行；<br>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行；<br>FULL JOIN: 只要其中一个表中存在匹配，就返回行。</p>
+<p>例：</p>
+<pre><code class="sql">SELECT u.uesr_name, c.corp_name FROM user AS u LEFT JOIN corp AS c ON c.id = u.corp_id;</code></pre>
+<h2 id="SQL进阶"><a href="#SQL进阶" class="headerlink" title="SQL进阶"></a>SQL进阶</h2><h3 id="UNION-UNION-ALL"><a href="#UNION-UNION-ALL" class="headerlink" title="UNION / UNION ALL"></a>UNION / UNION ALL</h3><p><code>UNION</code>用于合并两个或多个SELECT语句的结果，不返回任何重复的行。<code>UNION ALL</code>运算符语句，则包括重复行的结果。使用UNION，每个SELECT选择的列数必须具有相同的，相同数目的列表达式相同的数据类型，并让它们在相同的顺序，但它们不必是相同的长度。语法如下：</p>
+<pre><code class="sql">SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]
+
+UNION [UNION ALL]
+
+SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]</code></pre>
+<h3 id="INTERSECT-INTERSECT-ALL"><a href="#INTERSECT-INTERSECT-ALL" class="headerlink" title="INTERSECT / INTERSECT ALL"></a>INTERSECT / INTERSECT ALL</h3><p>和<code>UNION</code>指令类似，<code>INTERSECT</code>也是对两个SQL语句所产生的结果做处理的。不同的地方是，<code>UNION</code>基本上是一个<code>OR</code>(如果这个值存在于第一句或是第二句，它就会被选出)，而<code>INTERSECT</code>则比较像<code>AND</code>(这个值要存在于第一句和第二句才会被选出)。<code>UNION</code>是并集，而<code>INTERSECT</code>是交集。<code>INTERSECT ALL</code>则包含交集后的重复数据。语法如下：</p>
+<pre><code class="sql">SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]
+
+INTERSECT [INTERSECT ALL]
+
+SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]</code></pre>
+<h3 id="EXCEPT-EXCEPT-ALL"><a href="#EXCEPT-EXCEPT-ALL" class="headerlink" title="EXCEPT / EXCEPT ALL"></a>EXCEPT / EXCEPT ALL</h3><p><code>EXCEPT</code>用于求差集，其将查询在前一个结果集中但是不再后面一个结果集中的记录。<code>EXCEPT ALL</code>则包含交集后的重复数据。语法如下：</p>
+<pre><code class="sql">SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]
+
+EXCEPT [EXCEPT ALL]
+
+SELECT column1 [, column2 ]
+FROM table1 [, table2 ]
+[WHERE condition]</code></pre>
+<blockquote>
+<p><strong>注</strong>：在其他数据库求差集的关键字是：<code>MINUS</code>。</p>
+</blockquote>
+<h3 id="SUBQUERY"><a href="#SUBQUERY" class="headerlink" title="SUBQUERY"></a>SUBQUERY</h3><p><code>SUBQUERY</code>即子查询，子查询也是一个普通查询，目的是将用子查询返回的数据将被用来在主查询中作为条件，以进一步限制要检索的数据。可以使用子查询的有SELECT，INSERT，UPDATE和DELETE语句，与运算符如=，&lt;，&gt;，&gt;=，&lt;=，IN等一起使用。有几个子查询必须遵循的规则：</p>
+<ul>
+<li>必须用括号括起来的子查询。</li>
+<li>子查询只能有一个在SELECT子句中的列，除非多列在主查询的查询来比较其选定的列。</li>
+<li>ORDER BY不能使用在子查询中，虽然主查询就可以使用ORDER BY。GROUP BY可以用来执行相同的功能在子查询中的ORDER BY。</li>
+<li>子查询返回多于一行只能用于使用多值的运算符，如为IN，EXISTS，IN，ANY / SOME，ALL运算符。</li>
+</ul>
+<p>使用示例如下：</p>
+<pre><code class="sql">-- SELECT语句中的子查询
+SELECT * FROM COMPANY WHERE ID IN (SELECT ID FROM COMPANY WHERE SALARY &gt; 45000);
+
+-- INSERT语句的子查询
+INSERT INTO COMPANY_BKP SELECT * FROM COMPANY WHERE ID IN (SELECT ID FROM COMPANY);
+
+-- UPDATE语句的子查询
+UPDATE COMPANY SET SALARY = SALARY * 0.50 WHERE AGE IN (SELECT AGE FROM COMPANY_BKP WHERE AGE &gt;= 27);
+
+-- UPDATE语句的子查询
+DELETE FROM COMPANY WHERE AGE IN (SELECT AGE FROM COMPANY_BKP WHERE AGE &gt; 27 );</code></pre>
+<h3 id="EXISTS-NOT-EXISTS"><a href="#EXISTS-NOT-EXISTS" class="headerlink" title="EXISTS / NOT EXISTS"></a>EXISTS / NOT EXISTS</h3><p><code>EXISTS</code>用于检查子查询是否至少会返回一行数据，该子查询实际上并不返回任何数据，而是返回值True或False。EXISTS指定一个子查询，检测行的存在。<code>NOT EXISTS</code>的作用与<code>EXISTS</code>正好相反。如果子查询没有返回行，则满足了<code>NOT EXISTS</code>中的<code>WHERE</code>子句。语法如下： </p>
+<pre><code class="sql">EXISTS subquery</code></pre>
+<p>EXISTS 和 IN 的比较：</p>
+<ul>
+<li>EXISTS(包括 NOT EXISTS )子句的返回值是一个BOOLEAN值。EXISTS内部有一个子查询语句(SELECT … FROM…)，我将其称为EXIST的内查询语句。其内查询语句返回一个结果集。EXISTS子句根据其内查询语句的结果集空或者非空，返回一个布尔值。而IN引导的子查询只能返回一个字段</li>
+<li>EXISTS : 强调的是是否返回结果集，不要求知道返回什么，IN则需要知道返回的字段值。</li>
+<li>EXISTS与IN的使用效率的问题，通常情况下采用exists要比in效率高，因为IN不走索引，但要看实际情况具体使用：IN适合于外表大而内表小的情况；EXISTS适合于外表小而内表大的情况。</li>
+</ul>
+<h3 id="CONCATENATE"><a href="#CONCATENATE" class="headerlink" title="CONCATENATE"></a>CONCATENATE</h3><p>连接字符串。有的时候，我们有需要将由不同列获得的资料串连在一起。每一种数据库都有提供方法来达到这个目的。</p>
+<ul>
+<li>Oracle: CONCAT(), || </li>
+<li>SQL Server: + </li>
+<li>MySQL: CONCAT() </li>
+<li>PostgreSQL: CONCAT(), || </li>
+</ul>
+<p>PostgreSQL的<code>CONCAT()</code>的语法如下：</p>
+<blockquote>
+<p>concat(str “any” [, str “any” [, …] ])</p>
+</blockquote>
+<p>PostgreSQL的<code>||</code>的语法如下：</p>
+<blockquote>
+<p>string || string<br>string || non-string 或 non-string || string</p>
+</blockquote>
+<p>例：</p>
+<pre><code class="sql">SELECT u.user_name || &#39; &#39; || u.age FROM user AS u;</code></pre>
+<h3 id="SUBSTRING"><a href="#SUBSTRING" class="headerlink" title="SUBSTRING"></a>SUBSTRING</h3><p>截取字符串。</p>
+<ul>
+<li>Oracle: SUBSTR()</li>
+<li>SQL Server: SUBSTRING()</li>
+<li>MySQL: SUBSTR(), SUBSTRING()</li>
+<li>PostgreSQL: SUBSTRING()</li>
+</ul>
+<p>PostgreSQL的SUBSTRING()语法如下：</p>
+<ul>
+<li>substring(string [from int] [for int]) 截取子字符串。</li>
+<li>substring(string from pattern) 截取匹配POSIX正则表达式的子字符串。</li>
+<li>substring(string from pattern for escape) 截取匹配SQL正则表达式的子字符串。</li>
+</ul>
+<p>例：</p>
+<pre><code class="sql">-- 得到hom
+substring(&#39;Thomas&#39; from 2 for 3);
+
+-- 得到mas
+substring(&#39;Thomas&#39; from &#39;...$&#39;)
+
+-- 得到oma
+substring(&#39;Thomas&#39; from &#39;%#&quot;o_a#&quot;_&#39; for &#39;#&#39;)</code></pre>
+<h3 id="TRIM"><a href="#TRIM" class="headerlink" title="TRIM"></a>TRIM</h3><p>SQL中的<code>TRIM</code>函数是用来移除掉一个字符串中的字头或字尾。最常见的用途是移除字首或字尾的空白。这个函数在不同的数据库中有不同的名称： </p>
+<ul>
+<li>Oracle: LTRIM(), RTRIM()</li>
+<li>SQL Server: LTRIM(), RTRIM()</li>
+<li>MySQL: TRIM(), LTRIM(), RTRIM()</li>
+<li>PostgreSQL: TRIM(), BTRIM(), LTRIM(), RTRIM()</li>
+</ul>
+<p>PostgreSQL的TRIM()语法如下：</p>
+<ul>
+<li>trim([leading | trailing | both] [characters] from string) 从字符串string的开头/结尾/两边删除只包含characters中字符(缺省是空白)的最长的字符串。</li>
+<li>btrim(string text [, characters text]) 从string开头和结尾删除只包含 characters中字符(缺省是空白)的最长字符串。</li>
+<li>ltrim(string text [, characters text]) 从字符串string的开头删除只包含characters 中字符(缺省是一个空白)的最长的字符串。</li>
+<li>rtrim(string text [, characters text]) 从字符串string的结尾删除只包含characters中字符(缺省是个空白)的最长的字符串。</li>
+</ul>
+<pre><code class="sql">-- 得到Tom
+trim(both &#39;x&#39; from &#39;xTomxx&#39;)
+
+-- 得到trim
+btrim(&#39;xyxtrimyyx&#39;, &#39;xy&#39;)
+
+-- 得到trim
+ltrim(&#39;zzzytrim&#39;, &#39;xyz&#39;)
+
+-- 得到trim
+rtrim(&#39;trimxxxx&#39;, &#39;x&#39;)</code></pre>
+<h3 id="CASE"><a href="#CASE" class="headerlink" title="CASE"></a>CASE</h3><p><code>CASE</code>表达式是一种通用的条件表达式，类似于其它编程语言中的<code>if/else</code>语句。</p>
+<pre><code class="sql">CASE WHEN [condition] THEN result
+     [WHEN ...]
+     [ELSE result]
+END</code></pre>
+<p>示例如下：</p>
+<pre><code class="sql">SELECT sex, 
+    CASE WHEN sex = 0 THEN &#39;女&#39; 
+         WHEN sex = 1 THEN &#39;男&#39; 
+         ELSE &#39;未知&#39; 
+    END 
+FROM user;</code></pre>
+<h3 id="COALESCE"><a href="#COALESCE" class="headerlink" title="COALESCE"></a>COALESCE</h3><p><code>COALESCE</code>返回它的第一个非<code>NULL</code>的参数值。如果所有参数都是NULL那么返回NULL。它常用于在显示数据时用缺省值替换NULL。语法如下：</p>
+<pre><code class="sql">COALESCE(value [, ...])</code></pre>
+<p>使用示例：</p>
+<pre><code class="sql">SELECT COALESCE(NULL, NULL, GETDATE());</code></pre>
+<h3 id="NULLIF"><a href="#NULLIF" class="headerlink" title="NULLIF"></a>NULLIF</h3><p>当且仅当value1等于value2时，<code>NULLIF</code>才返回null。否则它返回value1。这些可以用于执行上面给出的<code>COALESCE</code>例子的反例。语法如下：</p>
+<pre><code class="sql">NULLIF(value1, value2)</code></pre>
+<h3 id="GREATEST-LEAST"><a href="#GREATEST-LEAST" class="headerlink" title="GREATEST / LEAST"></a>GREATEST / LEAST</h3><p>GREATEST和LEAST函数从一个任意数字表达式的列表里选取最大或者最小的数值。 这些表达式必须都可以转换成一个普通的数据类型，它将会是结果类型。列表中的NULL值将被忽略。只有所有表达式的结果都是 NULL 的时候，结果才会是 NULL。语法如下：</p>
+<pre><code class="sql">GREATEST(value [, ...])
+LEAST(value [, ...])</code></pre>
+<blockquote>
+<p><strong>注意</strong>：GREATEST和LEAST都不是 SQL 标准，但却是很常见的扩展。</p>
+</blockquote>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2018/10/05/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/Google%20Java%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" title="Google Java编程风格指南"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: Google Java编程风格指南</span></a><a class="button is-default" href="/2018/09/24/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Git/Git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" title="Git知识点整理"><span class="has-text-weight-semibold">下一页: Git知识点整理</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="zhengr/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/zhengr"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><a title="rss" target="_blank" rel="noopener nofollow" href="/atom.xml"><i class="iconfont icon-rss"></i></a><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Robin 2021</span></p></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
