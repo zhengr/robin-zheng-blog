@@ -1,22 +1,19 @@
-name: Build Claudia blog
+name: GitHub Actions Build and Deploy Demo
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    types: [ closed ]
-    branches: [ master ]
-
+    branches:
+      - master
 jobs:
-  build-deploy:
-    runs-on: macos-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm install hexo-cli -g
-      - run: npm ci
-      - run: hexo generate
-      - name: deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          CLEAN: true
-          BRANCH: gh-pages
-          FOLDER: public/
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: ./
+        BUILD_SCRIPT: npm install && npm run build
