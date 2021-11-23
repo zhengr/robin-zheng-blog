@@ -1,0 +1,986 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Hyperledger区块链技术催促供应链（SCM）再度进化，真正实现供应链全局可视化</title><meta name="description" content="观天之道，执天之行"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Robin's blog" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Robin's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Hyperledger区块链技术催促供应链（SCM）再度进化，真正实现供应链全局可视化</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%97%A5%E8%B6%8B%E6%88%90%E7%86%9F%EF%BC%8C%E7%9C%8B%E6%9C%AA%E6%9D%A5%E4%BA%94%E5%B9%B4%EF%BC%8C%E4%BE%9B%E5%BA%94%E9%93%BE%E5%B0%86%E8%BF%8E%E6%9D%A5%E4%B8%80%E6%AC%A1%E5%B7%A8%E5%A4%A7%E7%9A%84%E5%8D%87%E7%BA%A7%E3%80%82%E8%BF%99%E6%98%AF%E4%B8%80%E6%AC%A1%E6%80%A7%E6%89%93%E9%80%9A%E4%BE%9B%E5%BA%94%E9%93%BE%E4%B8%8A%E4%B8%8B%E6%B8%B8%E7%9A%84%E6%9C%BA%E4%BC%9A%EF%BC%8C%E4%BF%A1%E6%81%AF%E4%B8%8D%E5%86%8D%E6%98%AF%E7%94%B1%E7%82%B9%E5%AF%B9%E7%82%B9%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%AE%9E%E7%8E%B0%E5%85%B1%E4%BA%AB%E5%92%8C%E4%BC%A0%E9%80%92%E3%80%82"><span class="toc-text">区块链技术日趋成熟，看未来五年，供应链将迎来一次巨大的升级。这是一次性打通供应链上下游的机会，信息不再是由点对点数据传输实现共享和传递。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%AE%9A%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="toc-text">设定业务场景</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Hyperledger"><i class="tag post-item-tag">Hyperledger</i></a><a href="/tags/Blockchain"><i class="tag post-item-tag">Blockchain</i></a><a href="/tags/Supply%20chain"><i class="tag post-item-tag">Supply chain</i></a><a href="/tags/Fabric"><i class="tag post-item-tag">Fabric</i></a><a href="/tags/Inventory"><i class="tag post-item-tag">Inventory</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Hyperledger区块链技术催促供应链（SCM）再度进化，真正实现供应链全局可视化</h1><time class="has-text-grey" datetime="2017-09-15T00:00:00.000Z">2017-09-15</time><article class="mt-2 post-content"><h2 id="区块链技术日趋成熟，看未来五年，供应链将迎来一次巨大的升级。这是一次性打通供应链上下游的机会，信息不再是由点对点数据传输实现共享和传递。"><a href="#区块链技术日趋成熟，看未来五年，供应链将迎来一次巨大的升级。这是一次性打通供应链上下游的机会，信息不再是由点对点数据传输实现共享和传递。" class="headerlink" title="区块链技术日趋成熟，看未来五年，供应链将迎来一次巨大的升级。这是一次性打通供应链上下游的机会，信息不再是由点对点数据传输实现共享和传递。"></a>区块链技术日趋成熟，看未来五年，供应链将迎来一次巨大的升级。这是一次性打通供应链上下游的机会，信息不再是由点对点数据传输实现共享和传递。</h2><p>区块链能够围绕核心企业甚至终端消费者搭建一条包括制造商、供应商、零售商、物流公司、消费者在内的信息联盟，并将资金流、信息流、事务流都记录在这链条上。区块链的核心之处在于，参与的各方必须沿着时间轴实时提交事务数据，信息一旦经过背书写入区块，就只能读取，不能随意更改、删除，伪造。</p>
+<p>接下来我将基于hyperledger composer团队的Vehicle Lifecycle Chain Demo和大家分享区块链如何支撑一辆车从订单到生产再到报废的整个生命周期，同时车管所或者交警队等监管机构如何全程监管整个商业过程。</p>
+<h3 id="设定业务场景"><a href="#设定业务场景" class="headerlink" title="设定业务场景"></a>设定业务场景</h3><p>这个区块链网络跟踪从订单-&gt;制造-&gt;报废的车辆的生命周期，包括私人所有者、制造商、车管所/交警队和报废厂。车管所/交警队能够在整个过程中提供监督。</p>
+<p>一个私人客户<code>PriavteOwner</code> 参与者将通过制造商的应用程序提交<code>PlaceOrder</code>（下单）事务。制造商<code>Manufacturer</code>确认客户订单后将提交<code>UpdateOrderStatus</code> 事务，通过该事务可以根据车辆生产的进度不断更新订单状态（PLACED -&gt; SCHEDULED_FOR_MANUFACTURE -&gt; VIN_ASSIGNED -&gt; OWNER_ASSIGNED -&gt; DELIVERED），以便客户可以随时获知进度。车辆制造到一定阶段，制造商也将通过提交一个<code>ApplicationForVehicleRegistrationCertificate</code> 的事务来申请注册证书。当车辆被交付客户后，私人客户可以提交<code>PrivateVehicleTransfer</code>事务以完成客户间车辆买卖。监管机构可以对整个流程进行监督，并提交<code>UpdateSuspicious</code> 事务，以查看任何可能违反监管规定的可疑车辆。车辆报废厂可以提交一个<code>ScrapVehicle</code>或<code>ScrapAllVehiclesByColour</code>事务，来完成车辆的生命周期。</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture16.PNG" alt="20170915Capture16"></p>
+<p>这个区块链网络中需要做如下定义:</p>
+<p><strong>Participants</strong><code>AuctionHouse</code> <code>Company</code> <code>Manufacturer</code> <code>PrivateOwner</code> <code>Regulator</code> <code>ScrapMerchant</code></p>
+<p><strong>Assets</strong><code>Order</code> <code>Vehicle</code></p>
+<p><strong>Transactions</strong><code>PlaceOrder</code> <code>UpdateOrderStatus</code> <code>ApplicationForVehicleRegistrationCertificate</code> <code>PrivateVehicleTransfer</code> <code>ScrapVehicle</code> <code>UpdateSuspicious</code> <code>ScrapAllVehiclesByColour</code> <code>SetupDemo</code></p>
+<p><strong>Events</strong><code>PlaceOrderEvent</code> <code>UpdateOrderStatusEvent</code> <code>ScrapVehicleEvent</code></p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture1.PNG" alt="20170915Capture1"></p>
+<p>我们接下来逐一对以上这些元素展开介绍， 首先我们将构建五个models，</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hyperledger.github.io/composer/business-network/businessnetworkdefinition.html">参考：网络定义</a> - Business Network Definition</li>
+</ul>
+</blockquote>
+<ul>
+<li>models/base.cto</li>
+<li>models/business.cto</li>
+<li>models/manufacturer.cto</li>
+<li>models/vda.cto</li>
+<li>models/vehicle.cto</li>
+</ul>
+<pre><code>/* models/base.cto
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+  * A library of standard reusable types
+  */
+namespace composer.base
+
+enum Gender &#123;
+ o MALE
+ o FEMALE
+ o OTHER
+&#125;
+
+abstract participant Person &#123;
+  o String title optional
+  o String firstName  optional
+  o String lastName  optional
+  o String[] middleNames  optional
+  o Gender gender optional
+  o String[] nationalities optional
+  o ContactDetails contactDetails optional
+  o BirthDetails birthDetails optional
+  o DeathDetails deathDetails optional
+&#125;
+
+concept ContactDetails &#123;
+  o String email  optional
+  o String mobilePhone  optional
+  o String homePhone optional
+  o Address address optional
+&#125;
+
+concept BirthDetails &#123;
+  o DateTime dateOfBirth optional
+  o String placeOfBirth optional
+&#125;
+
+concept DeathDetails &#123;
+  o DateTime dateOfDeath optional
+  o String placeOfDeath optional
+&#125;
+
+/**
+ * A concept for a simple street address
+ */
+concept Address &#123;
+  o String city optional
+  o String country optional
+  o String locality optional
+  o String region optional
+  o String street optional
+  o String street2 optional
+  o String street3 optional
+  o String postalCode optional
+  o String postOfficeBoxNumber optional
+&#125;</code></pre>
+<pre><code>/* models/business.cto
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+namespace composer.business
+
+import composer.base.Person
+import composer.base.Address
+
+/**
+ * An abstract participant type in this business network
+ */
+abstract participant Business &#123;
+  o Address headquarters optional
+  o String name optional
+  --&gt; Manager[] managers optional
+&#125;
+
+abstract participant Employee extends Person &#123;
+  --&gt; Business employer
+  --&gt; Manager manager optional
+  o DateTime startDate optional
+  o String employmentStatus optional
+  o String department optional
+  o String jobRole optional
+&#125;
+
+abstract participant Manager extends Employee &#123;
+  --&gt; Employee[] directReports optional
+&#125;</code></pre>
+<pre><code>/* models/manufacturer.cto
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Order model for vehicle lifecycle
+ */
+namespace org.acme.vehicle.lifecycle.manufacturer
+
+import org.vda.VehicleDetails
+import composer.business.Business
+import composer.base.Person
+
+
+/**
+ * Status of an order
+ */
+enum OrderStatus &#123;
+  o PLACED
+  o SCHEDULED_FOR_MANUFACTURE
+  o VIN_ASSIGNED
+  o OWNER_ASSIGNED
+  o DELIVERED
+&#125;
+
+/**
+ * A manufacturer of vehicles
+ */
+participant Manufacturer identified by companyId extends Business &#123;
+  o String companyId
+&#125;
+
+/**
+ * An order for a vehicle to be fulfilled by a manufacturer
+ * and dispatched to an orderer (Person).
+ */
+asset Order identified by orderId &#123;
+  o String orderId
+  o VehicleDetails vehicleDetails
+  o OrderStatus orderStatus
+  --&gt; Manufacturer manufacturer
+  --&gt; Person orderer
+  o UpdateOrderStatus[] statusUpdates optional //TODO (LG): Unit test this
+&#125;
+
+/**
+ * Transaction to create an order
+ */
+transaction PlaceOrder &#123;
+  o String orderId
+  o VehicleDetails vehicleDetails
+  --&gt; Manufacturer manufacturer
+  --&gt; Person orderer
+&#125;
+
+event PlaceOrderEvent &#123;
+  o String orderId
+  o VehicleDetails vehicleDetails
+&#125;
+
+/**
+ * Transaction to update the status of an order
+ */
+transaction UpdateOrderStatus&#123;
+  o OrderStatus orderStatus
+  o String vin optional
+  o String v5c optional
+  o String numberPlate optional
+  --&gt; Order order
+&#125;
+
+event UpdateOrderStatusEvent &#123;
+  o OrderStatus orderStatus
+  o Order order
+&#125;</code></pre>
+<pre><code class="json">/* models/vda.cto
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Model based on the DVLA vehicle definition and registration process
+ */
+namespace org.vda
+import composer.base.Person
+/**
+ * Based on DVLA document V355/1
+ */
+enum TaxClass &#123;
+  o PRIVATE_LIGHT_GOODS
+  o PETROL_CAR
+  o DIESEL_CAR
+  o ALTERNATIVE_FUEL_CAR
+  o LIGHT_GOODS_VEHICLE
+  o EURO4_LIGHT_GOODS_VEHICLE
+  o EURO5_LIGHT_GOODS_VEHICLE
+  o HEAVY_GOODS_VEHICLE
+  o PRIVATE_HEAVY_GOODS_VEHICLE
+  o SPECIAL_TYPES
+  o HAULAGE_VEHICLES
+  o BUS
+  o MOTORCYCLE
+  o ELECTRIC_MOTOCYCLE
+  o SPECIAL_VEHICLES
+  o SMALL_ISLAND_VEHICLES
+  o RECOVERY_VEHICLE
+  o SPECIAL_CONCESSIONARY
+  o EMERGENCY_VEHICLE
+  o EXCEMPT_VEHICLE
+&#125;
+concept VehicleDetails &#123;
+  o String make
+  o String modelType
+  o String colour
+  o String vin optional
+  o String v5c optional
+  o String numberPlate optional
+  o String modelVariant optional
+  o String modelVersion optional
+  o String bodyType optional
+  o TaxClass taxationClass optional
+  o Integer revenueWeight optional
+  o Integer cylinderCapacity optional
+  o Double co2 optional // g/km
+  o String typeOfFuel optional
+  o Integer numberOfSeats optional
+  o Integer numberOfStandingPlaces optional
+  o String wheelPlan optional
+  o String vehicleCategory optional
+  o String typeApprovalNumber optional
+  o Double maxNetPower optional // kW
+  o String engineNumber optional
+  o Double maxPermissibleMass optional
+  o Double massInService optional
+  o Double powerWeightRatio optional
+  o TrailerDetails trailerDetails optional
+  o SoundDetails soundDetails optional
+  o ExhaustEmissions exhaustEmissions optional
+&#125;
+concept TrailerDetails &#123;
+  o Double maxPermissibleTowableMassBraked
+  o Double maxPermissibleTowableMassUnbraked
+&#125;
+concept SoundDetails &#123;
+  o Double stationary
+  o Double engineSpeed
+  o Double driveBy
+&#125;
+concept ExhaustEmissions &#123;
+  o Double co
+  o Double hc
+  o Double nox
+  o Double hc_plus_nox
+  o Double particulates
+&#125;
+concept VehicleTransferLogEntry &#123;
+  --&gt; Vehicle vehicle
+  --&gt; Person buyer
+  --&gt; Person seller optional
+  o DateTime timestamp
+&#125;
+/**
+ * Based on the DVLA V62 document
+ */
+transaction ApplicationForVehicleRegistrationCertificate &#123;
+  o VehicleDetails vehicleDetails
+  --&gt; Person keeper
+  o String dvlaFleetNumber optional
+  o String driversLicenseNumber optional
+  o Long mileage optional
+  o String previousPostCode optional
+&#125;
+abstract transaction VehicleTransaction  &#123;
+  --&gt; Vehicle vehicle
+&#125;
+/**
+ * DVLA V5C
+ */
+transaction PrivateVehicleTransfer extends VehicleTransaction &#123;
+  --&gt; Person seller
+  --&gt; Person buyer
+  o String specialNotes optional
+&#125;
+enum VehicleStatus &#123;
+  o ACTIVE
+  o OFF_THE_ROAD
+  o SCRAPPED
+&#125;
+asset Vehicle identified by vin &#123;
+  o String vin
+  o VehicleDetails vehicleDetails
+  o VehicleStatus vehicleStatus
+  --&gt; Person owner optional
+  o String numberPlate optional
+  o String suspiciousMessage optional
+  o VehicleTransferLogEntry[] logEntries optional
+&#125;
+transaction ScrapVehicle extends VehicleTransaction &#123;
+  o VehicleTransaction[] logEntries optional
+&#125;
+transaction UpdateSuspicious extends VehicleTransaction &#123;
+  o String message
+&#125;
+transaction ScrapAllVehiclesByColour  &#123;
+  o String colour
+&#125;
+event ScrapVehicleEvent &#123;
+  --&gt; Vehicle vehicle
+&#125;</code></pre>
+<pre><code class="json">/* models/vehicle.cto
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Vehicle model for vehicle lifecycle
+ */
+namespace org.acme.vehicle.lifecycle
+
+import composer.base.Person
+import composer.business.Business
+
+participant PrivateOwner identified by email extends Person &#123;
+  o String email
+&#125;
+
+participant Company identified by companyId extends Business &#123;
+  o String companyId
+&#125;
+
+participant Regulator extends Company &#123;
+&#125;
+
+participant AuctionHouse extends Company &#123;
+&#125;
+
+participant ScrapMerchant extends Company &#123;
+&#125;
+
+transaction SetupDemo  &#123;
+&#125;
+</code></pre>
+<p>在访问安全控制Access Control里我们赋予涉众全部访问权 Permissions.acl</p>
+<pre><code class="json">/**
+ * Sample access control list.
+ */
+rule Default &#123;
+    description: &quot;Allow all participants access to all resources&quot;
+    participant: &quot;ANY&quot;
+    operation: ALL
+    resource: &quot;org.acme.vehicle.lifecycle.**&quot;
+    action: ALLOW
+&#125;
+
+rule SystemACL &#123;
+  description:  &quot;System ACL to permit all access&quot;
+  participant: &quot;org.hyperledger.composer.system.Participant&quot;
+  operation: ALL
+  resource: &quot;org.hyperledger.composer.system.**&quot;
+  action: ALLOW
+&#125;</code></pre>
+<p>然后我们开始编写业务逻辑， 也就是事务处理逻辑部分。</p>
+<ul>
+<li>lib/setup.js</li>
+<li>lib/manufacturer.js</li>
+<li>lib/vda.js</li>
+</ul>
+<p>setup.js 是用来初始化用例数据，其他的事务处理接口都可以从以下scripts文件中找到对应的代码，具体的业务逻辑实现可以详研代码。</p>
+<pre><code class="javascript">/* setup.js 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Setup the demo
+ * @param &#123;org.acme.vehicle.lifecycle.SetupDemo&#125; setupDemo - the SetupDemo transaction
+ * @transaction
+ */
+function setupDemo(setupDemo) &#123;
+    console.log(&#39;setupDemo&#39;);
+
+    var factory = getFactory();
+    var NS_M = &#39;org.acme.vehicle.lifecycle.manufacturer&#39;;
+    var NS = &#39;org.acme.vehicle.lifecycle&#39;;
+    var NS_D = &#39;org.vda&#39;;
+
+    var names = [&#39;zhengr&#39;, &#39;simon&#39;, &#39;jake&#39;, &#39;anastasia&#39;, &#39;matthew&#39;, &#39;mark&#39;, &#39;fenglian&#39;, &#39;sam&#39;, &#39;james&#39;, &#39;nick&#39;, &#39;caroline&#39;, &#39;rachel&#39;, &#39;john&#39;, &#39;rob&#39;, &#39;tom&#39;, &#39;paul&#39;, &#39;ed&#39;, &#39;dave&#39;, &#39;anthony&#39;, &#39;toby&#39;, &#39;ant&#39;, &#39;matt&#39;, &#39;anna&#39;];
+    var vehicles = &#123;
+        &#39;Arium&#39;: &#123;
+            &#39;Nova&#39;: [
+                &#123;
+                    &#39;vin&#39;: &#39;156478954&#39;,
+                    &#39;colour&#39;: &#39;white&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;
+            ],
+            &#39;Nebula&#39;: [
+                &#123;
+                    &#39;vin&#39;: &#39;652345894&#39;,
+                    &#39;colour&#39;: &#39;blue&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;
+            ]
+        &#125;, 
+        &#39;Morde&#39;: &#123;
+            &#39;Putt&#39;: [
+                &#123;
+                    &#39;vin&#39;: &#39;6437956437&#39;, 
+                    &#39;colour&#39;: &#39;black&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;, 
+                    &#39;suspiciousMessage&#39;: &#39;Mileage anomaly&#39;
+                &#125;,
+                &#123;
+                    &#39;vin&#39;: &#39;857642213&#39;, 
+                    &#39;colour&#39;: &#39;red&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;,
+                &#123;
+                    &#39;vin&#39;: &#39;542376495&#39;, 
+                    &#39;colour&#39;: &#39;silver&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;
+            ],
+            &#39;Pluto&#39;: [
+                &#123;
+                    &#39;vin&#39;: &#39;976431649&#39;, 
+                    &#39;colour&#39;: &#39;white&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;,
+                &#123;
+                    &#39;vin&#39;: &#39;564215468&#39;, 
+                    &#39;colour&#39;: &#39;green&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;, 
+                    &#39;suspiciousMessage&#39;: &#39;Insurance write-off but still active&#39;
+                &#125;,
+                &#123;
+                    &#39;vin&#39;: &#39;784512464&#39;, 
+                    &#39;colour&#39;: &#39;grey&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;
+            ]
+        &#125;,
+        &#39;Ridge&#39;: &#123;
+            &#39;Cannon&#39;: [
+                &#123;
+                    &#39;vin&#39;: &#39;457645764&#39;,
+                    &#39;colour&#39;: &#39;red&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;,
+                &#123;
+                    &#39;vin&#39;: &#39;312457645&#39;,
+                    &#39;colour&#39;: &#39;white&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;, 
+                    &#39;suspiciousMessage&#39;: &#39;Suspicious ownership sequence&#39;
+                &#125;,
+                &#123;
+                    &#39;vin&#39;: &#39;65235647&#39;,
+                    &#39;colour&#39;: &#39;silver&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;, 
+                    &#39;suspiciousMessage&#39;: &#39;Untaxed vehicle&#39;
+                &#125;
+            ], 
+            &#39;Rancher&#39;: [
+                &#123;
+                    &#39;vin&#39;: &#39;85654575&#39;,
+                    &#39;colour&#39;: &#39;blue&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;
+                &#125;, 
+                &#123;
+                    &#39;vin&#39;: &#39;326548754&#39;,
+                    &#39;colour&#39;: &#39;white&#39;,
+                    &#39;vehicleStatus&#39;: &#39;ACTIVE&#39;, 
+                    &#39;suspiciousMessage&#39;: &#39;Uninsured vehicle&#39;
+                &#125;
+            ]
+        &#125;
+    &#125;;
+
+    var manufacturers = [];
+    var privateOwners = [];
+
+    for (var name in vehicles) &#123;
+        var manufacturer = factory.newResource(NS_M, &#39;Manufacturer&#39;, name);
+        manufacturers.push(manufacturer);
+    &#125;
+
+   for(var i=0; i&lt;names.length; i++) &#123;
+       var name = names[i];
+       var privateOwner = factory.newResource(NS, &#39;PrivateOwner&#39;, name);
+       privateOwners.push(privateOwner);
+   &#125;
+
+    var regulator = factory.newResource(NS, &#39;Regulator&#39;, &#39;regulator&#39;);
+
+
+    var privateOwnerRegistry;
+    var vehicleRegistry;
+
+    return getParticipantRegistry(NS + &#39;.Regulator&#39;)
+        .then(function(regulatorRegistry) &#123;
+            return regulatorRegistry.add(regulator);
+        &#125;)
+        .then(function() &#123;
+            return getParticipantRegistry(NS_M + &#39;.Manufacturer&#39;);
+        &#125;)
+        .then(function(manufacturerRegistry) &#123;
+            return manufacturerRegistry.addAll(manufacturers);
+        &#125;)
+        .then(function() &#123;
+            return getParticipantRegistry(NS + &#39;.PrivateOwner&#39;);
+        &#125;)
+        .then(function(privateOwnerRegistry) &#123;
+            return privateOwnerRegistry.addAll(privateOwners);
+        &#125;)
+        .then(function() &#123;
+            return getAssetRegistry(NS_D + &#39;.Vehicle&#39;);
+        &#125;)
+        .then(function(vehicleRegistry) &#123;
+            var vs = [];
+            var carCount = 0;
+            for (var mName in vehicles) &#123;
+                var manufacturer = vehicles[mName];
+                for (var mModel in manufacturer) &#123;
+                    var model = manufacturer[mModel];
+                    for(var i=0; i&lt;model.length; i++) &#123;
+                        var vehicleTemplate = model[i];
+                        var vehicle = factory.newResource(NS_D, &#39;Vehicle&#39;, vehicleTemplate.vin);
+                        vehicle.owner = factory.newRelationship(NS, &#39;PrivateOwner&#39;, names[carCount]);
+                        vehicle.vehicleStatus = vehicleTemplate.vehicleStatus;
+                        vehicle.vehicleDetails = factory.newConcept(NS_D, &#39;VehicleDetails&#39;);
+                        vehicle.vehicleDetails.make = mName; 
+                        vehicle.vehicleDetails.modelType = mModel; 
+                        vehicle.vehicleDetails.colour = vehicleTemplate.colour; 
+                        vehicle.vehicleDetails.vin = vehicleTemplate.vin;
+
+                        if (vehicleTemplate.suspiciousMessage) &#123;
+                            vehicle.suspiciousMessage = vehicleTemplate.suspiciousMessage;
+                        &#125;
+
+                        if (!vehicle.logEntries) &#123;
+                            vehicle.logEntries = [];
+                        &#125;
+
+                        var logEntry = factory.newConcept(NS_D, &#39;VehicleTransferLogEntry&#39;);
+                        logEntry.vehicle = factory.newRelationship(NS_D, &#39;Vehicle&#39;, vehicleTemplate.vin);
+                        logEntry.buyer = factory.newRelationship(NS, &#39;PrivateOwner&#39;, names[carCount]);
+                        logEntry.timestamp = setupDemo.timestamp
+
+                        vehicle.logEntries.push(logEntry);
+
+                        vs.push(vehicle);
+                        carCount++;
+                    &#125;
+                &#125;
+            &#125;
+            return vehicleRegistry.addAll(vs);
+        &#125;);
+&#125;</code></pre>
+<pre><code class="javascript">/* lib/manufacturer.js 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/**
+ * Place an order for a vehicle
+ * @param &#123;org.acme.vehicle.lifecycle.manufacturer.PlaceOrder&#125; placeOrder - the PlaceOrder transaction
+ * @transaction
+ */
+function placeOrder(placeOrder) &#123;
+    console.log(&#39;placeOrder&#39;);
+
+    var factory = getFactory();
+    var NS_M = &#39;org.acme.vehicle.lifecycle.manufacturer&#39;;
+    var NS = &#39;org.acme.vehicle.lifecycle&#39;;
+    var NS_D = &#39;org.vda&#39;;
+
+    var order = factory.newResource(NS_M, &#39;Order&#39;, placeOrder.orderId);
+    order.vehicleDetails = placeOrder.vehicleDetails;
+    order.orderStatus = &#39;PLACED&#39;;
+    order.manufacturer = placeOrder.manufacturer;
+    order.orderer = factory.newRelationship(NS, &#39;PrivateOwner&#39;, placeOrder.orderer.getIdentifier());
+
+    // save the order
+    return getAssetRegistry(order.getFullyQualifiedType())
+        .then(function (registry) &#123;
+            return registry.add(order);
+        &#125;)
+        .then(function()&#123;
+            var placeOrderEvent = factory.newEvent(NS_M, &#39;PlaceOrderEvent&#39;);
+              placeOrderEvent.orderId = order.orderId;
+              placeOrderEvent.vehicleDetails = order.vehicleDetails;
+            emit(placeOrderEvent);
+        &#125;);
+&#125;
+
+/**
+ * Update the status of an order
+ * @param &#123;org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus&#125; updateOrderStatus - the UpdateOrderStatus transaction
+ * @transaction
+ */
+function updateOrderStatus(updateOrderStatus) &#123;
+    console.log(&#39;updateOrderStatus&#39;);
+
+    var factory = getFactory();
+    var NS_M = &#39;org.acme.vehicle.lifecycle.manufacturer&#39;;
+    var NS = &#39;org.acme.vehicle.lifecycle&#39;;
+    var NS_D = &#39;org.vda&#39;;
+
+    // save the new status of the order
+    updateOrderStatus.order.orderStatus = updateOrderStatus.orderStatus;
+
+      // get vehicle registry
+      return getAssetRegistry(NS_D + &#39;.Vehicle&#39;)
+          .then(function(registry) &#123;
+              if (updateOrderStatus.orderStatus === &#39;VIN_ASSIGNED&#39;) &#123;
+                var vehicle = factory.newResource(NS_D, &#39;Vehicle&#39;, updateOrderStatus.vin );
+                vehicle.vehicleDetails = updateOrderStatus.order.vehicleDetails;
+                vehicle.vehicleDetails.vin = updateOrderStatus.vin;
+                vehicle.vehicleStatus = &#39;OFF_THE_ROAD&#39;;
+                return registry.add(vehicle);
+            &#125; else if(updateOrderStatus.orderStatus === &#39;OWNER_ASSIGNED&#39;) &#123;
+                if (!updateOrderStatus.order.orderer.vehicles) &#123;
+                    updateOrderStatus.order.orderer.vehicles = [];
+                &#125;
+
+                return registry.get(updateOrderStatus.vin)
+                    .then(function(vehicle) &#123;
+                        vehicle.vehicleStatus = &#39;ACTIVE&#39;;
+                        vehicle.owner = factory.newRelationship(&#39;org.acme.vehicle.lifecycle&#39;, &#39;PrivateOwner&#39;, updateOrderStatus.order.orderer.email);
+                        vehicle.numberPlate = updateOrderStatus.numberPlate || &#39;&#39;;
+                        vehicle.vehicleDetails.numberPlate = updateOrderStatus.numberPlate || &#39;&#39;;
+                        vehicle.vehicleDetails.v5c = updateOrderStatus.v5c || &#39;&#39;;
+                        if (!vehicle.logEntries) &#123;
+                            vehicle.logEntries = [];
+                        &#125;
+                        var logEntry = factory.newConcept(NS_D, &#39;VehicleTransferLogEntry&#39;);
+                        logEntry.vehicle = factory.newRelationship(NS_D, &#39;Vehicle&#39;, updateOrderStatus.vin);
+                        logEntry.buyer = factory.newRelationship(NS, &#39;PrivateOwner&#39;, updateOrderStatus.order.orderer.email);
+                        logEntry.timestamp = updateOrderStatus.timestamp;
+                        vehicle.logEntries.push(logEntry);
+                        return registry.update(vehicle);
+                    &#125;);
+            &#125;
+        &#125;)
+          .then(function() &#123;
+              // get order registry
+            return getAssetRegistry(updateOrderStatus.order.getFullyQualifiedType());
+        &#125;)
+          .then(function(registry) &#123;
+              // update order status
+            updateOrderStatus.order.vehicleDetails.vin = updateOrderStatus.vin || &#39;&#39;;
+
+            if (!updateOrderStatus.order.statusUpdates) &#123;
+                updateOrderStatus.order.statusUpdates = [];
+            &#125;
+
+            updateOrderStatus.order.statusUpdates.push(updateOrderStatus);
+
+              return registry.update(updateOrderStatus.order);
+        &#125;)
+        .then(function()&#123;
+            var updateOrderStatusEvent = factory.newEvent(NS_M, &#39;UpdateOrderStatusEvent&#39;);
+              updateOrderStatusEvent.orderStatus = updateOrderStatus.order.orderStatus;
+              updateOrderStatusEvent.order = updateOrderStatus.order;
+            emit(updateOrderStatusEvent);
+        &#125;);
+
+&#125;</code></pre>
+<pre><code class="javascript">/* lib/vda.js
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/**
+ * Transfer a vehicle to another private owner
+ * @param &#123;org.vda.PrivateVehicleTransfer&#125; privateVehicleTransfer - the PrivateVehicleTransfer transaction
+ * @transaction
+ */
+function privateVehicleTransfer(privateVehicleTransfer) &#123;
+    console.log(&#39;privateVehicleTransfer&#39;);
+
+    var currentParticipant = getCurrentParticipant();
+
+
+    var NS_M = &#39;org.acme.vehicle.lifecycle.manufacturer&#39;;
+    var NS = &#39;org.acme.vehicle.lifecycle&#39;;
+    var NS_D = &#39;org.vda&#39;;
+    var factory = getFactory();
+
+    var seller = privateVehicleTransfer.seller;
+    var buyer = privateVehicleTransfer.buyer;
+    var vehicle = privateVehicleTransfer.vehicle;
+
+    //change vehicle owner
+    vehicle.owner = buyer;
+
+    //PrivateVehicleTransaction for log
+    var vehicleTransferLogEntry = factory.newConcept(NS_D, &#39;VehicleTransferLogEntry&#39;);
+    vehicleTransferLogEntry.vehicle = factory.newRelationship(NS_D, &#39;Vehicle&#39;, vehicle.getIdentifier());
+    vehicleTransferLogEntry.seller = factory.newRelationship(NS, &#39;PrivateOwner&#39;, seller.getIdentifier());
+    vehicleTransferLogEntry.buyer = factory.newRelationship(NS, &#39;PrivateOwner&#39;, buyer.getIdentifier());
+    vehicleTransferLogEntry.timestamp = privateVehicleTransfer.timestamp;
+    if (!vehicle.logEntries) &#123;
+        vehicle.logEntries = [];
+    &#125;
+
+    vehicle.logEntries.push(vehicleTransferLogEntry);
+
+    return getAssetRegistry(vehicle.getFullyQualifiedType())
+        .then(function(ar) &#123;
+            return ar.update(vehicle);
+        &#125;);
+&#125;
+
+/**
+ * Scrap a vehicle
+ * @param &#123;org.vda.ScrapVehicle&#125; scrapVehicle - the ScrapVehicle transaction
+ * @transaction
+ */
+function scrapVehicle(scrapVehicle) &#123;
+    console.log(&#39;scrapVehicle&#39;);
+
+    var NS_D = &#39;org.vda&#39;;
+    var assetRegistry;
+
+    return getAssetRegistry(NS_D + &#39;.Vehicle&#39;)
+        .then(function(ar) &#123;
+            assetRegistry = ar;
+            return assetRegistry.get(scrapVehicle.vehicle.getIdentifier());
+        &#125;)
+        .then(function(vehicle)&#123;
+            vehicle.vehicleStatus = &#39;SCRAPPED&#39;;
+            return assetRegistry.update(vehicle);
+        &#125;);
+&#125;
+
+/**
+ * Scrap a vehicle
+ * @param &#123;org.vda.ScrapAllVehiclesByColour&#125; scrapAllVehicles - the ScrapAllVehicles transaction
+ * @transaction
+ */
+function scrapAllVehiclesByColour(scrapAllVehicles) &#123;
+    console.log(&#39;scrapVehicle&#39;);
+
+    var NS_D = &#39;org.vda&#39;;
+    var assetRegistry;
+
+    // create the query
+    var q = &#123;
+        selector: &#123;
+            &#39;vehicleDetails.colour&#39;: scrapAllVehicles.colour
+        &#125;
+    &#125;;
+
+    return getAssetRegistry(NS_D + &#39;.Vehicle&#39;)
+        .then(function (ar)&#123;
+            assetRegistry = ar;
+            return queryNative(JSON.stringify(q));
+        &#125;)
+        .then(function (resultArray) &#123;
+            console.log(&#39;TP function received query result: &#39;, JSON.stringify(resultArray));
+            if (resultArray.length &lt; 1 ) &#123;
+                throw new Error(&#39;No vehicles found with &#39; + scrapAllVehicles.colour, resultArray.length);
+            &#125;
+
+            var factory = getFactory();
+            var promises =[];
+            var serializer = getSerializer();
+            for (var x = 0; x &lt; resultArray.length; x++) &#123;
+                var currentResult = resultArray[x];
+                var vehicle = serializer.fromJSON(currentResult.Record);
+
+                vehicle.vehicleStatus = &#39;SCRAPPED&#39;;
+                var scrapVehicleEvent = factory.newEvent(NS_D, &#39;ScrapVehicleEvent&#39;);
+                scrapVehicleEvent.vehicle = vehicle;
+                emit(scrapVehicleEvent);
+                promises.push(assetRegistry.update(vehicle));
+
+            &#125;
+            return Promise.all(promises);
+        &#125;);
+&#125;</code></pre>
+<p>通过以上构建， 我们已经完成一个区块链的业务场景构架， 接下来就可以通过调用各个事务接口完成整个业务场景。</p>
+<p>首先初始化演示数据</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture2.PNG" alt="20170915Capture2"></p>
+<p>演示数据成功初始化, 这个事务处理将注册三个汽车生产商 <code>Manufacturer</code> , 二十三个私人拥有者 <code>PrivateOwner</code> 以及一个监管单位 <code>Regulator</code> . 同时会有十三辆 <code>Vehicle</code> 资产被注册.</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture3.PNG" alt="20170915Capture3"></p>
+<p>首先用户zhengr提交<code>PlaceOrder</code>事务处理下订单， 订单号”SO87200315”</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.vehicle.lifecycle.manufacturer.PlaceOrder&quot;,
+  &quot;orderId&quot;: &quot;SO87200315&quot;,
+  &quot;vehicleDetails&quot;: &#123;
+    &quot;$class&quot;: &quot;org.vda.VehicleDetails&quot;,
+    &quot;make&quot;: &quot;Arium&quot;,
+    &quot;modelType&quot;: &quot;Gamora&quot;,
+    &quot;colour&quot;: &quot;Sunburst Orange&quot;
+  &#125;,
+  &quot;manufacturer&quot;: &quot;resource:org.acme.vehicle.lifecycle.manufacturer.Manufacturer#Arium&quot;,
+  &quot;orderer&quot;: &quot;resource:org.acme.vehicle.lifecycle.PrivateOwner#zhengr&quot;
+&#125;</code></pre>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture4.PNG" alt="20170915Capture4"></p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture6.PNG" alt="20170915Capture6"></p>
+<p>这个时候，汽车生产厂商”Arium”从区块链上获得订单信息，并更新订单状态为</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture7.PNG" alt="20170915Capture7"></p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture8.PNG" alt="20170915Capture8"></p>
+<p>可以看到订单信息已经被生产厂商Arium更新，客户zhengr可以很容易从区块链获得信息看到他预定的汽车已经排产。</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.vehicle.lifecycle.manufacturer.Order&quot;,
+  &quot;orderId&quot;: &quot;SO87200315&quot;,
+  &quot;vehicleDetails&quot;: &#123;
+    &quot;$class&quot;: &quot;org.vda.VehicleDetails&quot;,
+    &quot;make&quot;: &quot;Arium&quot;,
+    &quot;modelType&quot;: &quot;Gamora&quot;,
+    &quot;colour&quot;: &quot;Sunburst Orange&quot;,
+    &quot;vin&quot;: &quot;&quot;
+  &#125;,
+  &quot;orderStatus&quot;: &quot;SCHEDULED_FOR_MANUFACTURE&quot;,
+  &quot;manufacturer&quot;: &quot;resource:org.acme.vehicle.lifecycle.manufacturer.Manufacturer#Arium&quot;,
+  &quot;orderer&quot;: &quot;resource:org.acme.vehicle.lifecycle.PrivateOwner#zhengr&quot;,
+  &quot;statusUpdates&quot;: [
+    &#123;
+      &quot;$class&quot;: &quot;org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus&quot;,
+      &quot;orderStatus&quot;: &quot;SCHEDULED_FOR_MANUFACTURE&quot;,
+      &quot;order&quot;: &quot;resource:org.acme.vehicle.lifecycle.manufacturer.Order#SO87200315&quot;,
+      &quot;transactionId&quot;: &quot;4a307c97-4f70-4405-ad0e-7e604c7a3715&quot;,
+      &quot;timestamp&quot;: &quot;2017-09-15T19:20:07.066Z&quot;
+    &#125;
+  ]
+&#125;</code></pre>
+<p>汽车生产商赋予VIN编号，提交更新订单事务</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus&quot;,
+  &quot;orderStatus&quot;: &quot;VIN_ASSIGNED&quot;,
+  &quot;vin&quot;: &quot;23538390&quot;,
+  &quot;v5c&quot;: &quot;&quot;,
+  &quot;numberPlate&quot;: &quot;&quot;,
+  &quot;order&quot;: &quot;resource:org.acme.vehicle.lifecycle.manufacturer.Order#SO87200315&quot;
+&#125;
+</code></pre>
+<p>就会发现”vin”: “23538390” 这辆车出现在资产Vehicle的列表中</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture9.PNG" alt="20170915Capture9"></p>
+<p>再次提交订单更新事务处理，可以看到车辆已经被分配给zhengr</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus&quot;,
+  &quot;orderStatus&quot;: &quot;OWNER_ASSIGNED&quot;,
+  &quot;vin&quot;: &quot;23538390&quot;,
+  &quot;v5c&quot;: &quot;22356707&quot;,
+  &quot;numberPlate&quot;: &quot;JN887323&quot;,
+  &quot;order&quot;: &quot;resource:org.acme.vehicle.lifecycle.manufacturer.Order#SO87200315&quot;
+&#125;</code></pre>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture10.PNG" alt="20170915Capture10"></p>
+<p>再次提交订单更新事务，将订单更新为‘DELIVERED’ 已交付状态。至此汽车已经从制造商交付给了客户。</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus&quot;,
+  &quot;orderStatus&quot;: &quot;DELIVERED&quot;,
+  &quot;vin&quot;: &quot;23538390&quot;,
+  &quot;v5c&quot;: &quot;22356707&quot;,
+  &quot;numberPlate&quot;: &quot;JN887323&quot;,
+  &quot;order&quot;: &quot;resource:org.acme.vehicle.lifecycle.manufacturer.Order#SO87200315&quot;
+&#125;</code></pre>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture11.PNG" alt="20170915Capture11"></p>
+<p>zhengr把车转手给了Anna，需要提交一个PrivateVehicleTransfer事务</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.vda.PrivateVehicleTransfer&quot;,
+  &quot;seller&quot;: &quot;resource:org.acme.vehicle.lifecycle.PrivateOwner#zhengr&quot;,
+  &quot;buyer&quot;: &quot;resource:org.acme.vehicle.lifecycle.PrivateOwner#anna&quot;,
+  &quot;specialNotes&quot;: &quot;Please pay me by bitcoin&quot;,
+  &quot;vehicle&quot;: &quot;resource:org.vda.Vehicle#23538390&quot;
+&#125;</code></pre>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture12.PNG" alt="20170915Capture12"></p>
+<p>可以看到车主从zhengr变为了Anna</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture14.PNG" alt="20170915Capture14"></p>
+<p>监管部门可以随时通过监管软件提交UpdateSuspicious事务更新车辆监管信息，报废厂也可以通过提交ScrapVehicle事务报废制定的车辆， 这些操作就不一一赘述了。</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.vda.UpdateSuspicious&quot;,
+  &quot;message&quot;: &quot;排放超标&quot;,
+  &quot;vehicle&quot;: &quot;resource:org.vda.Vehicle#23538390&quot;
+&#125;</code></pre>
+<p>通过以上的一系列操作可以看出，不同的软件， 不同的公司，不同的人都在同一个链条上对区块进行操作，这样的事务记录是去中心的，提交点不同但是都需要遵守区块链的交易规则。</p>
+<p>当一个特定的区块链网络（Hyperledger Fabric V1）成立，相关的ERP、CRM、MES、APP通过相应SDK， REST API，订阅/发布 Event, 都可以非常顺畅的加入到区块链中。当前可以测试通过的系统有：</p>
+<ul>
+<li>Oracle e-business suites R12 </li>
+<li>Oracle Fusion application</li>
+<li>Siebel</li>
+<li>SAP 待测试  </li>
+</ul>
+<p>==================补充==========================</p>
+<p>本例中车辆制造商的ERP/MES可以是这个样子:</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture17.PNG" alt="20170915Capture17"></p>
+<p>监管机构的可以是这样的系统：</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture18.PNG" alt="20170915Capture18"></p>
+<p>用户可以随时通过手机客户端查看车辆交付进展：</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/20170915Capture19.PNG" alt="20170915Capture19"></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2017/09/19/%E5%8C%BA%E5%9D%97%E9%93%BE/2017-09-19-HYPERLEDGER-SCM%20Finance/" title="区块链技术将盘活供应链金融Supply Chain Finance,两眼活棋的局面将要到来"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 区块链技术将盘活供应链金融Supply Chain Finance,两眼活棋的局面将要到来</span></a><a class="button is-default" href="/2017/09/09/AI/2017-09-09-neural-style/" title="Neural style神经元网络深度学习皮克斯风美化头像"><span class="has-text-weight-semibold">下一页: Neural style神经元网络深度学习皮克斯风美化头像</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="zhengr/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/zhengr"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><a title="rss" target="_blank" rel="noopener nofollow" href="/atom.xml"><i class="iconfont icon-rss"></i></a><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Robin 2021</span></p></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Robin's blog</title><meta name="description" content="观天之道，执天之行"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Robin's blog" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Robin's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>分类 · 软件工具</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Linux"><i class="tag post-item-tag">Linux</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2018/10/10/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Linux/%E5%B8%B8%E7%94%A8Bash%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/">常用Bash命令整理之操作文件和目录</a></h2><time class="has-text-grey" datetime="2018-10-10T23:10:00.000Z">2018-10-10</time><p class="is-flex-grow-2 mt-2">1. touch - 创建文件touch命令就可用于创建、变更和修改文件的时间戳。它是 Linux 操作系统的标准程序。touch命令又如下选项：
+-a: 只改变访问时间 
+-c: 不创建任何文件
+-m: 只改变修改时间
+-r: 使用指定文件的时间替代当前时间
+-t: 使用 [[CC]YY]MMDDhhmm[.ss] 替代当前时间
+touch 命令的常见用法如下：
+# 创建一个名为 effyl 的新空文件
+touch effyl
+
+# 同时创建名称分别为 effyl myeffyl lueffyl 的三个文件
+touch effyl myeffyl lueffyl
+
+# 使用 -a 选项，可以改变或更新文件的最新访问时间，如果文件 effyl 不存在，则新创建一个
+touch -a effyl
+
+# 使用 ..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2018/10/10/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Linux/%E5%B8%B8%E7%94%A8Bash%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Linux"><i class="tag post-item-tag">Linux</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2018/10/09/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Linux/%E5%B8%B8%E7%94%A8Bash%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86%E4%B9%8B%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/">常用Bash命令整理之查看文件和目录</a></h2><time class="has-text-grey" datetime="2018-10-09T22:45:00.000Z">2018-10-09</time><p class="is-flex-grow-2 mt-2">1. ls - 列出文件名和目录ls命令是Linux中最常用的命令之一，其作用就是列出文件名和目录。在命令行提示符下，直接输入ls命令，不带任何选项，将列出当前目录下所有文件和目录，但不会显示详细的信息，比如，文件类型、大小、修改日期和时间、权限等。
+以下便是ls命令及其选项的作用说明：
+# 仅列出当前目录下所有文件和目录
+ls
+
+# 每行显示一条记录，每条记录包括文件类型、大小、修改日期和时间、权限等
+ls -l
+
+# 将文件大小显示符合人类阅读习惯的格式
+ls -lh
+
+# 将使用不同的特殊字符归类不同的文件类型
+ls -F
+
+# 以长列表格式列出某个目录的信息
+ls -ld /var/log
+
+# 将递归地列出子目录的内容
+ls -R /etc/sysconfig/
+
+# 以长列表格式按文件或目录的修..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2018/10/09/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Linux/%E5%B8%B8%E7%94%A8Bash%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86%E4%B9%8B%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="http://blog.chinaunix.net/attachment/201402/19/10415985_139279770639pM.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2018/09/24/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Git/Git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"><img class="post-cover-img js-img-fadeIn" src="http://blog.chinaunix.net/attachment/201402/19/10415985_139279770639pM.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Git"><i class="tag post-item-tag">Git</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2018/09/24/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Git/Git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">Git知识点整理</a></h2><time class="has-text-grey" datetime="2018-09-24T21:50:00.000Z">2018-09-24</time><p class="is-flex-grow-2 mt-2">1. Git基本概念。
+repository
+config
+init
+clone
+fetch
+pull
+commit
+push
+branch
+head
+tag
+merge
+conflict
+diff
+log
+show
+status
+
+2. Git工作空间和文件状态(1).工作空间
+左侧为工作区，右侧为版本库。
+
+工作区（Working Directory） 就是在电脑里能看到的目录，比如learngit文件夹就是一个工作区。
+版本库（Repository）工作区有一个隐藏目录.git，是Git的版本库。
+
+在版本库中标记为index的区域为暂存区，标记为master的是Git为我们自动创建的第一个分支，代表的是目录树。此时HEAD实际是指向master分支的一个“游标”，所以图示的命令中出现HEAD的地方可..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2018/09/24/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Git/Git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Python"><i class="tag post-item-tag">Python</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2014/10/29/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/2014-10-29-Python-lib/">强大的Python模块</a></h2><time class="has-text-grey" datetime="2014-10-29T00:00:00.000Z">2014-10-29</time><p class="is-flex-grow-2 mt-2">强大的Python模块, 数据科学必备
+模块列表
+
+
+模块名
+简介
+文档链接
+
+
+
+talib
+TA-Lib是一个被交易员常用的技术分析库，包含了超过150+的技术指标比如MACD,RSI,Bollinger Bands等
+TA-Lib官网
+
+
+pandas
+最流行的Python数据分析库
+pandas文档
+
+
+numpy
+numpy是一个Python的科学计算基础库。
+numpy文档
+
+
+scipy
+SciPy是一个Python的数学、科学和工程计算的生态系统库。
+scipy文档
+
+
+statsmodels
+Statsmodels可以研究数据，构架统计模型和进行统计测试。功能包括：线性回归模型等
+statsmodels文档
+
+
+bisect
+Python的排序模块
+bisect文档
+
+
+cmath
+提供可..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2014/10/29/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/2014-10-29-Python-lib/">更多</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap"><a class="extend prev" rel="prev" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/">1</a><span class="page-number current">2</span></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container categories-widget category-page"><h3>分类</h3><section><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Foo/">Foo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/notes/">notes</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BC%81%E4%B8%9A%E6%9E%B6%E6%9E%84/">企业架构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A5%97%E8%A3%85%E8%BD%AF%E4%BB%B6/">套装软件</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/">编程之道</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/">软件工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/">软件设计</a><span class="category-list-count">1</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/zhengr"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><a title="rss" target="_blank" rel="noopener nofollow" href="/atom.xml"><i class="iconfont icon-rss"></i></a><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Robin 2021</span></p></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/addActiveLinkStyle.js"></script></body></html>
