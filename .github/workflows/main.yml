@@ -1,17 +1,22 @@
-name: Pages
-
+name: Build Claudia blog
 on:
   push:
-    branches:
-    - master
+    branches: [ master ]
+  pull_request:
+    types: [ closed ]
+    branches: [ master ]
 
 jobs:
-  pages:
-    runs-on: ubuntu-latest
+  build-deploy:
+    runs-on: macos-latest
     steps:
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/checkout@v2
+      - run: npm install hexo-cli -g
+      - run: npm ci
+      - run: hexo generate
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          publish_dir: ./
-          publish_branch: gh-pages
+          CLEAN: true
+          BRANCH: gh-pages
+          FOLDER: public/
