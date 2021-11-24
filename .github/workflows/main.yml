@@ -1,4 +1,4 @@
-name: Build Claudia blog
+name: Build blog
 on:
   push:
     branches: [ master ]
