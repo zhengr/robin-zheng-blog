@@ -1,0 +1,224 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Hyperledger Composer Playground 安装及示例测试</title><meta name="description" content="观天之道，执天之行"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Robin's blog" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Robin's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Hyperledger Composer Playground 安装及示例测试</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E5%B0%86%E5%B8%A6%E6%82%A8%E4%BA%86%E8%A7%A3%E5%A6%82%E4%BD%95%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9C%BA%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85%E5%92%8C%E8%BF%90%E8%A1%8CHyperledger-Composer-Playground-%EF%BC%8C%E5%B9%B6%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAHyperledger-Fabric-v1-0%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%BF%9B%E8%A1%8C%E5%95%86%E5%93%81%E4%BA%A4%E6%98%93"><span class="toc-text">本文将带您了解如何在本地机器上安装和运行Hyperledger Composer Playground ，并创建一个Hyperledger Fabric v1.0的实例进行商品交易</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%89%8D"><span class="toc-text">开始前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85Composer-playground"><span class="toc-text">创建容器以及安装Composer playground</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B%E4%B8%80"><span class="toc-text">测试案例一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ref"><span class="toc-text">Ref</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Hyperledger"><i class="tag post-item-tag">Hyperledger</i></a><a href="/tags/Blockchain"><i class="tag post-item-tag">Blockchain</i></a><a href="/tags/Playground"><i class="tag post-item-tag">Playground</i></a><a href="/tags/Composer"><i class="tag post-item-tag">Composer</i></a><a href="/tags/Fabric"><i class="tag post-item-tag">Fabric</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Hyperledger Composer Playground 安装及示例测试</h1><time class="has-text-grey" datetime="2017-09-01T00:00:00.000Z">2017-09-01</time><article class="mt-2 post-content"><h2 id="本文将带您了解如何在本地机器上安装和运行Hyperledger-Composer-Playground-，并创建一个Hyperledger-Fabric-v1-0的实例进行商品交易"><a href="#本文将带您了解如何在本地机器上安装和运行Hyperledger-Composer-Playground-，并创建一个Hyperledger-Fabric-v1-0的实例进行商品交易" class="headerlink" title="本文将带您了解如何在本地机器上安装和运行Hyperledger Composer Playground ，并创建一个Hyperledger Fabric v1.0的实例进行商品交易"></a>本文将带您了解如何在本地机器上安装和运行Hyperledger Composer Playground ，并创建一个Hyperledger Fabric v1.0的实例进行商品交易</h2><p>不动手试试总感觉对这个东西的理解只停留在概念和一堆名词上，周末找时间本地搭建了一个超级账本网络配以Hyperledger Composer Playground进行测试，有兴趣的可以耐着性子往下看。</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/Homepage_Illustration_2.png" alt="Homepage_Illustration_2"></p>
+<h3 id="开始前"><a href="#开始前" class="headerlink" title="开始前"></a>开始前</h3><p>为了安装Hyperledger Composer Playground，你需要安装以下软件:</p>
+<ul>
+<li>Docker Engine 17.03 or greater</li>
+<li>Docker Compose 1.8 or greater</li>
+</ul>
+<p>请注意: 如果你以前在本机有Hyperledger Composer Playground及Hyperledger Fabric就需要注意，如果你希望从干净环境重新开始，那么下面的命令将删除任何运行的Docker容器并删除所有下载的Docker镜像</p>
+<blockquote>
+<p>(如果在你的机器上使用其他的Docker镜像的话，一定要小心):</p>
+</blockquote>
+<pre><code>docker ps -aq | xargs docker rm -f
+docker images -aq | xargs docker rmi -f</code></pre>
+<p>要跑Hyperledger Composer and Hyperledger Fabric,建议最少4G内存，严重建议至少8G.</p>
+<h3 id="创建容器以及安装Composer-playground"><a href="#创建容器以及安装Composer-playground" class="headerlink" title="创建容器以及安装Composer playground"></a>创建容器以及安装Composer playground</h3><ol>
+<li><p>找一个目录(例如：/u01/hypercomposer)，然后运行下面的命令来下载并启动一个Hyperledger Fabric 实例和Hyperledger Composer Playground:</p>
+</li>
+<li><pre><code class="shell">curl -sSL https://hyperledger.github.io/composer/install-hlfv1.sh | bash</code></pre>
+</li>
+<li><p>然后用Chrome或者Firefox访问 http://<HOSTNAME>:8080 打开 Hyperledger Composer Playground，如果下面这页能打开，并且Connection Profiles也可以正常连接的话，恭喜你，基本的测试环境搭建好了。</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/cpmposer-1.PNG" alt="cpmposer-1"></p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/cpmposer-2.PNG" alt="cpmposer-2"></p>
+<h3 id="测试案例一"><a href="#测试案例一" class="headerlink" title="测试案例一"></a>测试案例一</h3><p>我们直接采用Hyperledger Composer自带的测试场景 Commodities Trading Business Network</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/cpmposer-3.PNG" alt="cpmposer-3"></p>
+<p>Trade Network, This Business Network illustrates commodity trading. This business network defines:</p>
+<p><strong>Participant</strong><br><code>Trader</code></p>
+<p><strong>Asset</strong><br><code>Commodity</code></p>
+<p><strong>Transaction(s)</strong><br><code>Transaction</code><br><strong>Event</strong><br><code>TradeNotification</code></p>
+<p>models/trading.cto  </p>
+<pre><code>/**
+ * Commodity trading network
+ */
+namespace org.acme.trading
+
+asset Commodity identified by tradingSymbol &#123;
+    o String tradingSymbol
+    o String description
+    o String mainExchange
+    o Double quantity
+    --&gt; Trader owner
+&#125;
+
+participant Trader identified by tradeId &#123;
+    o String tradeId
+    o String firstName
+    o String lastName
+&#125;
+
+transaction Trade &#123;
+    --&gt; Commodity commodity
+    --&gt; Trader newOwner
+&#125;
+
+event TradeNotification &#123;
+    --&gt; Commodity commodity
+&#125;
+
+transaction RemoveHighQuantityCommodities &#123;
+&#125;
+
+event RemoveNotification &#123;
+    --&gt; Commodity commodity
+&#125;</code></pre>
+<p>lib/logic.js</p>
+<pre><code>/*
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Track the trade of a commodity from one trader to another
+ * @param &#123;org.acme.trading.Trade&#125; trade - the trade to be processed
+ * @transaction
+ */
+function tradeCommodity(trade) &#123;
+
+    // set the new owner of the commodity
+    trade.commodity.owner = trade.newOwner;
+    return getAssetRegistry(&#39;org.acme.trading.Commodity&#39;)
+        .then(function (assetRegistry) &#123;
+
+            // emit a notification that a trade has occurred
+            var tradeNotification = getFactory().newEvent(&#39;org.acme.trading&#39;, &#39;TradeNotification&#39;);
+            tradeNotification.commodity = trade.commodity;
+            emit(tradeNotification);
+
+            // persist the state of the commodity
+            return assetRegistry.update(trade.commodity);
+        &#125;);
+&#125;
+
+/**
+ * Remove all high volume commodities
+ * @param &#123;org.acme.trading.RemoveHighQuantityCommodities&#125; remove - the remove to be processed
+ * @transaction
+ */
+function removeHighQuantityCommodities(remove) &#123;
+
+    return getAssetRegistry(&#39;org.acme.trading.Commodity&#39;)
+        .then(function (assetRegistry) &#123;
+            return query(&#39;selectCommoditiesWithHighQuantity&#39;)
+                    .then(function (results) &#123;
+
+                        var promises = [];
+
+                        for (var n = 0; n &lt; results.length; n++) &#123;
+                            var trade = results[n];
+
+                            // emit a notification that a trade was removed
+                            var removeNotification = getFactory().newEvent(&#39;org.acme.trading&#39;, &#39;RemoveNotification&#39;);
+                            removeNotification.commodity = trade;
+                            emit(removeNotification);
+
+                            // remove the commodity
+                            promises.push(assetRegistry.remove(trade));
+                        &#125;
+
+                        // we have to return all the promises
+                        return Promise.all(promises);
+                    &#125;);
+        &#125;);
+&#125;</code></pre>
+<p>permissions.acl</p>
+<pre><code>/**
+ * Access control rules for mynetwork
+ */
+rule Default &#123;
+    description: &quot;Allow all participants access to all resources&quot;
+    participant: &quot;ANY&quot;
+    operation: ALL
+    resource: &quot;org.acme.trading.*&quot;
+    action: ALLOW
+&#125;
+
+rule SystemACL &#123;
+  description:  &quot;System ACL to permit all access&quot;
+  participant: &quot;org.hyperledger.composer.system.Participant&quot;
+  operation: ALL
+  resource: &quot;org.hyperledger.composer.system.**&quot;
+  action: ALLOW
+&#125;</code></pre>
+<p>queries.qry</p>
+<pre><code>query selectCommodities &#123;
+  description: &quot;Select all commodities&quot;
+  statement:
+      SELECT org.acme.trading.Commodity
+&#125;
+
+query selectCommoditiesByExchange &#123;
+  description: &quot;Select all commodities based on their main exchange&quot;
+  statement:
+      SELECT org.acme.trading.Commodity
+          WHERE (mainExchange==_$exchange)
+&#125;
+
+query selectCommoditiesByOwner &#123;
+  description: &quot;Select all commodities based on their owner&quot;
+  statement:
+      SELECT org.acme.trading.Commodity
+          WHERE (owner == _$owner)
+&#125;
+
+query selectCommoditiesWithHighQuantity &#123;
+  description: &quot;Select commodities based on quantity&quot;
+  statement:
+      SELECT org.acme.trading.Commodity
+          WHERE (quantity &gt; 60)
+&#125;</code></pre>
+<p>To test this Business Network Definition in the <strong>Test</strong> tab:</p>
+<p>先定义两个买卖参与者 Trader1和Trader2，Create two <code>Trader</code> participants:</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.trading.Trader&quot;,
+  &quot;tradeId&quot;: &quot;TRADER1&quot;,
+  &quot;firstName&quot;: &quot;Jenny&quot;,
+  &quot;lastName&quot;: &quot;Jones&quot;
+&#125;</code></pre>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.trading.Trader&quot;,
+  &quot;tradeId&quot;: &quot;TRADER2&quot;,
+  &quot;firstName&quot;: &quot;Amy&quot;,
+  &quot;lastName&quot;: &quot;Williams&quot;
+&#125;</code></pre>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/cpmposer-4.PNG" alt="cpmposer-4"><br>再创建一个商品资产 <code>Create a </code>Commodity` asset:</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.trading.Commodity&quot;,
+  &quot;tradingSymbol&quot;: &quot;ABC&quot;,
+  &quot;description&quot;: &quot;Test commodity&quot;,
+  &quot;mainExchange&quot;: &quot;Euronext&quot;,
+  &quot;quantity&quot;: 72.297,
+  &quot;owner&quot;: &quot;resource:org.acme.trading.Trader#TRADER1&quot;
+&#125;</code></pre>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/cpmposer-5.PNG" alt="cpmposer-5"><br>提交一个交易事务处理，也就是把商品ABC从Trader1卖给了Trader2, 也就是更换所有者从Trader到Trader2 <code>Submit a </code>Trade` transaction:</p>
+<pre><code>&#123;
+  &quot;$class&quot;: &quot;org.acme.trading.Trade&quot;,
+  &quot;commodity&quot;: &quot;resource:org.acme.trading.Commodity#ABC&quot;,
+  &quot;newOwner&quot;: &quot;resource:org.acme.trading.Trader#TRADER2&quot;
+&#125;</code></pre>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/cpmposer-6.PNG" alt="cpmposer-6"></p>
+<p>After submitting this transaction, you should now see  the transaction in the transaction registry. As a result, the owner of  the commodity <code>ABC</code> should now be owned <code>TRADER2</code> in the Asset Registry.</p>
+<p>提交此事务后，现在应该在事务注册表中可以看到事务。此时商品ABC的所有者在资产注册表中应该变成TRADER2。</p>
+<p><img src="https://raw.githubusercontent.com/zhengr/zhengr.github.io/master/assets/images/cpmposer-7.PNG" alt="cpmposer-7"></p>
+<p>看到这架构解释里，很多人会觉得这是什么呀， 不就改了一个字段值吗？ 这有什么高深莫测的！！其实我们需要明白的是这个字段变化后面整个区块链网络上发生的事情，这部分比较复杂，推荐大家看原文档中两块：</p>
+<h4 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://hyperledger-fabric.readthedocs.io/en/latest/arch-deep-dive.html">架构解释</a> - Architecture Explained</li>
+<li><a target="_blank" rel="noopener" href="https://hyperledger-fabric.readthedocs.io/en/latest/txflow.html">交易流程</a> - Transaction Flow </li>
+</ul>
+<p>翻译的文档现在的致命问题是对关键字的翻译不统一， 有些词汇可以看到好几个版本翻译， 所以还是建议大家直接看原文理解。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2017/09/07/%E7%94%9F%E6%B4%BB/2017-09-07-thinking/" title="敞开怀抱拥抱奇奇怪怪的东西吧"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 敞开怀抱拥抱奇奇怪怪的东西吧</span></a><a class="button is-default" href="/2017/07/06/%E6%95%B0%E6%8D%AE%E5%BA%93/2017-07-06-Oracle-NodeJS%20-link/" title="Oracle Node.js 连接Oracle ERP数据库测试"><span class="has-text-weight-semibold">下一页: Oracle Node.js 连接Oracle ERP数据库测试</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="zhengr/robin-zheng-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/zhengr"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><a title="rss" target="_blank" rel="noopener nofollow" href="/atom.xml"><i class="iconfont icon-rss"></i></a><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Robin 2021</span></p></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
