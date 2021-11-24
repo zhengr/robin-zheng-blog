@@ -1,0 +1,85 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Oracle microcontainer builder</title><meta name="description" content="观天之道，执天之行"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Robin's blog" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Robin's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Oracle microcontainer builder</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#smith-microcontainer-builder"><span class="toc-text">smith - microcontainer builder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oracle-%E5%BE%AE%E5%AE%B9%E5%99%A8%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="toc-text">Oracle 微容器构建工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-smith"><span class="toc-text">What is smith?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Principles-of-microcontainers"><span class="toc-text">Principles of microcontainers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Building-smith"><span class="toc-text">Building smith</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runtime-dependencies"><span class="toc-text">Runtime dependencies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installing-smith"><span class="toc-text">Installing smith</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-smith"><span class="toc-text">Using smith</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build"><span class="toc-text">Build</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build-Types"><span class="toc-text">Build Types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Upload"><span class="toc-text">Upload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Download"><span class="toc-text">Download</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Oracle"><i class="tag post-item-tag">Oracle</i></a><a href="/tags/Microcontainers"><i class="tag post-item-tag">Microcontainers</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Oracle microcontainer builder</h1><time class="has-text-grey" datetime="2017-07-04T00:00:00.000Z">2017-07-04</time><article class="mt-2 post-content"><h2 id="smith-microcontainer-builder"><a href="#smith-microcontainer-builder" class="headerlink" title="smith - microcontainer builder"></a><code>smith</code> - microcontainer builder</h2><h2 id="Oracle-微容器构建工具"><a href="#Oracle-微容器构建工具" class="headerlink" title="Oracle 微容器构建工具"></a>Oracle 微容器构建工具</h2><p><img src="https://github.com/oracle/smith/raw/master/smith.png" alt="smith" title="smith"></p>
+<h2 id="What-is-smith"><a href="#What-is-smith" class="headerlink" title="What is smith?"></a>What is <code>smith</code>?</h2><p><code>smith</code> is a simple command line utility for building<br><a target="_blank" rel="noopener" href="https://blogs.oracle.com/developers/the-microcontainer-manifesto">microcontainers</a><br>from rpm packages or oci images.</p>
+<p>如果用Docker的， 可以试试这个Oracle用新开源工具构建镜像</p>
+<h2 id="Principles-of-microcontainers"><a href="#Principles-of-microcontainers" class="headerlink" title="Principles of microcontainers"></a>Principles of microcontainers</h2><ol>
+<li><p>A microcontainer only contains the process to be run and its direct<br>dependencies.</p>
+</li>
+<li><p>The microcontainer has files with no user ownership or special permissions<br>beyond the executable bit.</p>
+</li>
+<li><p>The root filesystem of the container should be able to run read-only. All<br>writes from the container should be into a directory called <code>/write</code>. Any<br>unique config that an individual container instance will need should be<br>placed into a directory called <code>/read</code>. Ephemeral files such as pid files<br>can be written to <code>/run</code>.</p>
+</li>
+</ol>
+<h2 id="Building-smith"><a href="#Building-smith" class="headerlink" title="Building smith"></a>Building <code>smith</code></h2><p>Building can be done via the Makefile:</p>
+<pre><code>make</code></pre>
+<p>Build dependencies:</p>
+<pre><code>golang-bin</code></pre>
+<p>Go dependencies are vendored in the vendor directory.</p>
+<h2 id="Runtime-dependencies"><a href="#Runtime-dependencies" class="headerlink" title="Runtime dependencies"></a>Runtime dependencies</h2><p>To build from rpms, smith requires:</p>
+<pre><code>mock</code></pre>
+<p>Although mock is used for rpm packaging, it can be installed on debian/ubuntu<br>if you are willing to be a little tricky. Specifically you need at least mock<br>1.2.  Version 1.1.X will not work because the -r flag does not support abspath<br>to the mock config file. Instructions for debian/ubuntu:</p>
+<pre><code>sudo apt-get install createrepo yum
+# At the time of this writing the below package is suitable and available
+# for download. Your milage may vary and we suggest finding an official
+# debian mock package that is 1.2 or 1.3.
+wget http://ftp.debian.org/debian/pool/main/m/mock/mock_1.3.2-1_all.deb
+sudo dpkg -i mock_1.3.2-1_all.deb
+usermod -a -G mock &lt;your_username&gt;
+# rpm on debian has a patch to macros that messes up mock so undo it. Note
+# that updating your os will sometimes reset this file and you will have
+# to run this command again.
+sudo sed -i &#39;s;%_dbpath\t.*;%_dbpath\t\t%&#123;_var&#125;/lib/rpm;g&#39; /usr/lib/rpm/macros
+# on debian/ubuntu for some reason yum tries to install packages for
+# multiple archs, so it is necessary to update the yum.conf section in
+# default.cfg to prevent that. If you switch your default.cfg you may
+# have to do this again.
+sudo sed -i &#39;/\[main\]/a multilib_policy=best&#39; /etc/mock/default.cfg</code></pre>
+<h2 id="Installing-smith"><a href="#Installing-smith" class="headerlink" title="Installing smith"></a>Installing <code>smith</code></h2><p>Installing can be done via the Makefile:</p>
+<pre><code>sudo make install</code></pre>
+<h2 id="Using-smith"><a href="#Using-smith" class="headerlink" title="Using smith"></a>Using <code>smith</code></h2><p>To use smith, simply create a smith.yaml defining your container and run<br><code>smith</code>. If you want to overlay additional files or symlinks, simply place them<br>into a directory called <code>rootfs</code> beside smith.yaml.</p>
+<p>If you are building the same container multiple times without editing the<br>package line, the <code>-f</code> parameter will rebuild the container without<br>reinstalling the package.</p>
+<h2 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h2><p>To build a container with smith, create a smith.yaml file and invoke smith with no<br>parameters:</p>
+<pre><code>mkdir cat
+cd cat
+
+cat &gt;smith.yaml &lt;&lt;EOF
+package: coreutils
+paths:
+- /usr/bin/cat
+cmd:
+- /usr/bin/cat
+- /read/data
+EOF
+
+mkdir -p rootfs/read
+echo &quot;Hello World!&quot; &gt;rootfs/read/data
+
+smith</code></pre>
+<p>Your image will be saved as image.tar.gz. You can change the name with a<br>parameter:</p>
+<pre><code>smith -i cat.tar.gz</code></pre>
+<p>Smith has a few other options which can be viewed using “–help”</p>
+<pre><code>smith --help</code></pre>
+<h2 id="Build-Types"><a href="#Build-Types" class="headerlink" title="Build Types"></a>Build Types</h2><p>Smith can build from local rpm files or repositories. You can change the yum<br>config by modifying your /etc/mock/default.cfg.</p>
+<p>Smith can also build directly from oci files downloaded via the download<br>command, or an oci directly from a docker repository. Simply specify either in<br>your smith.yaml as package, for example:</p>
+<pre><code>package: https://registry-1.docker.io/library/fedora
+paths:
+- /usr/bin/cat
+cmd:
+- /usr/bin/cat
+- /read/data</code></pre>
+<h2 id="Upload"><a href="#Upload" class="headerlink" title="Upload"></a>Upload</h2><p>You can upload your image to a docker repository:</p>
+<pre><code>smith upload -r https://username:password@registry-1.docker.io/myrepo/cat -i cat.tar.gz</code></pre>
+<p>Images will be uploaded to the tag <code>latest</code>. You can specify an alternative tag<br>name to use appending it after a colon:</p>
+<pre><code>smith upload -r https://registry-1.docker.io/myrepo/cat:newtag</code></pre>
+<p>It automatically uploads to registry-1.docker.io using docker media types.<br>Otherwise it tries to upload using oci media types.  If you want to upload to a<br>private docker v2 registry that doesn’t support oci media types, you can use<br>the -d switch:</p>
+<pre><code>smith upload -d -r https://myregistry.com/myrepo/cat -i cat.tar.gz</code></pre>
+<p>You can specify a tag name to upload to by appending it to the name</p>
+<h2 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h2><p><code>smith</code> can also download existing images from docker repositories:</p>
+<pre><code>smith download -r https://registry-1.docker.io/library/hello-world -i hello-world.tar.gz</code></pre>
+<p>It will convert these to tar.gz oci layouts. The <code>latest</code> tag will be<br>downloaded. To download an alternative tag, append it after a colon:</p>
+<pre><code>smith download -r https://registry-1.docker.io/library/hello-world:othertag</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2017/07/04/%E6%95%B0%E6%8D%AE%E5%BA%93/2017-07-04-Oracle--Database-EM/" title="重建 Oracle EM For EBS R12"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 重建 Oracle EM For EBS R12</span></a><a class="button is-default" href="/2017/07/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/2017-07-03-oracle-nosql-database/" title="Oracle NoSQL Database介绍及部署"><span class="has-text-weight-semibold">下一页: Oracle NoSQL Database介绍及部署</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="zhengr/robin-zheng-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/zhengr"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><a title="rss" target="_blank" rel="noopener nofollow" href="/atom.xml"><i class="iconfont icon-rss"></i></a><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Robin 2021</span></p></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

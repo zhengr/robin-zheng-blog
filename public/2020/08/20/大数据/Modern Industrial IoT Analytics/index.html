@@ -1,0 +1,355 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>（技）现代工业物联网(IIoT)大数据+AI场景实战-风力发电机优化</title><meta name="description" content="观天之道，执天之行"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Robin's blog" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Robin's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">（技）现代工业物联网(IIoT)大数据+AI场景实战-风力发电机优化</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86"><span class="toc-text">第一部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-%E9%A3%8E%E5%8A%9B%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BC%98%E5%8C%96"><span class="toc-text">案例 - 风力发电机优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84-%E8%8E%B7%E5%8F%96%E3%80%81%E5%AD%98%E5%82%A8%E3%80%81%E5%87%86%E5%A4%87%E3%80%81%E5%9F%B9%E8%AE%AD%E3%80%81%E6%9C%8D%E5%8A%A1%E3%80%81%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-text">架构 - 获取、存储、准备、培训、服务、可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86"><span class="toc-text">第二部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-text">部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%EF%BC%9AAzure-IoT-Hub%E5%88%B0%E6%95%B0%E6%8D%AE%E6%B9%96"><span class="toc-text">数据获取：Azure IoT Hub到数据湖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9AAzure-Databricks%E5%92%8CDelta-Lake"><span class="toc-text">数据存储和处理：Azure Databricks和Delta Lake</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86"><span class="toc-text">第三部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%8A%9F%E7%8E%87%E8%BE%93%E5%87%BA%E5%92%8C%E5%89%A9%E4%BD%99%E5%AF%BF%E5%91%BD%E4%BC%98%E5%8C%96"><span class="toc-text">机器学习：功率输出和剩余寿命优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%92%8C%E6%89%98%E7%AE%A1"><span class="toc-text">模型部署和托管</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%EF%BC%9AAzure-Data-Explorer-ADX-%E5%92%8CAzure-Synapse-Analytics-ASA"><span class="toc-text">数据服务：Azure Data Explorer (ADX) 和Azure Synapse Analytics (ASA)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ADX%E4%B8%AD%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%8A%A5%E5%91%8A"><span class="toc-text">ADX中的业务报告</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ASA%E4%B8%AD%E7%9A%84%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A"><span class="toc-text">ASA中的分析报告</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-text">总结</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE"><i class="tag post-item-tag">大数据</i></a><a href="/tags/%E6%8A%80"><i class="tag post-item-tag">技</i></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%B9%96"><i class="tag post-item-tag">数据湖</i></a><a href="/tags/IIOT"><i class="tag post-item-tag">IIOT</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">（技）现代工业物联网(IIoT)大数据+AI场景实战-风力发电机优化</h1><time class="has-text-grey" datetime="2020-08-20T00:00:00.000Z">2020-08-20</time><article class="mt-2 post-content"><p>工业物联网(IIoT)在过去的几年里，从一个主要在石油和天然气行业进行试点的草根技术栈，如今发展到在制造、化工、公用事业、运输和能源行业广泛采用和生产使用。传统的物联网系统，如Scada、Historians甚至Hadoop，由于以下因素，无法提供大多数组织所需的大数据分析能力，无法对工业资产进行预测性优化。</p>
+<table>
+<thead>
+<tr>
+<th><strong>挑战</strong></th>
+<th>所需能力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据量显著增大且更加频繁</td>
+<td>从物联网设备中可靠地采集和存储亚秒级颗粒读数的能力，且成本效益要高，每天的数据流为TB级。</td>
+</tr>
+<tr>
+<td>数据处理需求更加复杂</td>
+<td>符合ACID标准的数据处理–基于时间的窗口、聚合、枢轴、回填、移动，并能轻松地重新处理旧数据。</td>
+</tr>
+<tr>
+<td>更多的用户角色希望访问数据</td>
+<td>数据是一种开放的格式，易于与运营工程师、数据分析师、数据工程师和数据科学家共享，而不会形成孤岛。</td>
+</tr>
+<tr>
+<td>决策需要可扩展的ML</td>
+<td>能够在细化的历史数据上快速、协作地训练预测模型，以做出智能的资产优化决策。</td>
+</tr>
+<tr>
+<td>降低成本的要求比以往更高</td>
+<td>低成本的按需管理平台，可随数据和工作负载独立扩展，不需要大量的前期资金。</td>
+</tr>
+</tbody></table>
+<p>企业正在转向类似Microsoft Azure这样的云计算平台，以利用它们所提供的可扩展的、支持IIoT的技术，使获取、处理、分析和服务时间序列数据源（如Historians和SCADA系统）变得简单。</p>
+<blockquote>
+<ul>
+<li>在第1部分中，我们将讨论端到端技术堆栈以及Azure Databricks在现代物联网分析的工业应用的架构和设计中所扮演的角色</li>
+<li>在第2部分中，我们将深入探讨部署现代IIoT分析技术，将现场设备的实时IIoT机对机数据摄入数据湖存储中，并直接在数据湖上进行复杂的时间序列处理</li>
+<li>在第3部分中，我们将探讨利用工业物联网数据进行机器学习和分析</li>
+</ul>
+</blockquote>
+<h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><h3 id="案例-风力发电机优化"><a href="#案例-风力发电机优化" class="headerlink" title="案例 - 风力发电机优化"></a>案例 - 风力发电机优化</h3><p>大多数IIoT分析项目都是为了最大限度地提高工业资产的短期利用率，同时最大限度地降低其长期维护成本。在本文中，我们重点关注一个假设的能源供应商，试图优化其风力发电机。最终目标是确定一组最佳的风机运行参数，以最大限度地提高每个风机的功率输出，同时最大限度地减少其故障时间。</p>
+<p><img src="https://i.loli.net/2020/08/16/GWpl38mcxF2y4dR.png"></p>
+<p>该项目的最终交付物是：</p>
+<ol>
+<li><p>一个自动的数据摄取和处理管道，将数据传送给所有终端用户</p>
+</li>
+<li><p>预测模型，在当前天气和运行条件下，估计每个风机的功率输出</p>
+</li>
+<li><p>预测模型，在当前天气和运行条件下，估计每个风机的剩余寿命</p>
+</li>
+<li><p>确定最佳运行条件的优化模型，以最大限度地提高功率输出，最大限度地降低维护成本，从而实现总利润的最大化</p>
+</li>
+<li><p>为业务团队提供了一个实时分析仪表盘，以可视化地显示其风电场的当前和未来状态，如下图所示：</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2020/08/16/LwglJ5TfroHVzAY.png" alt="数据看板"></p>
+<h3 id="架构-获取、存储、准备、培训、服务、可视化"><a href="#架构-获取、存储、准备、培训、服务、可视化" class="headerlink" title="架构 - 获取、存储、准备、培训、服务、可视化"></a>架构 - 获取、存储、准备、培训、服务、可视化</h3><p>下面的架构说明了许多组织使用的现代最佳平台，该方案基于<strong>Microsoft Azure云</strong>为IIoT分析提供的所有功能。如果企业有独立的自研技术能力，类似的架构可以通过基于开源项目自主开发也可以灵活实现。</p>
+<p><img src="https://i.loli.net/2020/08/16/FgYRmkV2NjMdcUr.png"></p>
+<p>该架构的一个关键组件是 Azure 数据湖存储 (ADLS)，它在 Azure 中实现了一次写入、多次访问的分析模式。然而，仅靠数据湖并不能解决时间序列流数据带来的现实世界挑战。砖厂的Delta存储格式在ADLS中存储的所有数据源上提供了一层弹性和性能。具体到时间序列数据，与ADLS上的其他存储格式相比，Delta具有以下优势。</p>
+<table>
+<thead>
+<tr>
+<th>所需能力</th>
+<th><strong>ADLS Gen 2的其他格式</strong></th>
+<th><strong>ADLS Gen 2的Delta格式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>流批一体化</td>
+<td>数据湖经常与像CosmosDB这样的流式存储一起使用，从而形成一个复杂的架构。</td>
+<td>符合ACID标准的事务使数据工程师能够在ADLS上执行流式摄取和历史上的批量加载到相同的位置。</td>
+</tr>
+<tr>
+<td>模式执行和演变</td>
+<td>数据湖不强制执行模式，要求所有数据都推送到关系型数据库中以保证可靠性。</td>
+<td>模式是默认执行的。随着新的物联网设备被添加到数据流中，模式可以安全地演进，因此下游应用不会失败。</td>
+</tr>
+<tr>
+<td>高效 Upserts</td>
+<td>数据湖不支持在线更新和合并，需要删除和插入整个分区才能执行更新。</td>
+<td>MERGE命令对于处理延迟的物联网读数、用于实时丰富的修改维度表或需要重新处理数据的情况非常有效。</td>
+</tr>
+<tr>
+<td>文件压缩</td>
+<td>将时间序列数据串流到数据湖中，会产生数百甚至数千个微小的文件。</td>
+<td>Delta中的自动压缩功能可以优化文件大小，以提高吞吐量和并行性。</td>
+</tr>
+<tr>
+<td>多维聚类</td>
+<td>数据湖仅在分区上提供下推式过滤功能。</td>
+<td>在时间戳或传感器ID等字段上对时间序列进行ZORDER，可以对这些列进行过滤和连接，比简单的分区技术快100倍。</td>
+</tr>
+</tbody></table>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在第一部分，回顾了传统IIoT系统面临的一些不同挑战。并介绍了现代IIoT分析的用例和目标，分享了组织已经在大规模部署的可重复架构，并探讨了Delta格式对每个所需功能的好处。</p>
+<p>在第二部分中，将把现场设备的实时IIoT数据摄入Azure，并直接在数据湖上进行复杂的时间序列处理。</p>
+<h2 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h2><p>第一部分中，我们介绍了大数据用例和现代IIoT分析的目标，分享了企业用于大规模部署IIoT的实际可重复架构，并探讨了Delta格式对现代IIoT分析所需的每个数据湖功能的好处。我们再回顾一下架构图：</p>
+<p><img src="https://i.loli.net/2020/08/16/xzydpaCbU56ofsE.png"></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>我们使用Azure的Raspberry PI IoT模拟器来模拟实时的机器对机器传感器读数，并将其发送到Azure IoT Hub。</p>
+<h4 id="数据获取：Azure-IoT-Hub到数据湖"><a href="#数据获取：Azure-IoT-Hub到数据湖" class="headerlink" title="数据获取：Azure IoT Hub到数据湖"></a>数据获取：Azure IoT Hub到数据湖</h4><p>我们的部署将天气（风速和风向、温度、湿度）和风机远程信息（角度和转速）的传感器读数发送到 IoT 云计算中心。Azure Databricks 可以原生地将来自 IoT 集线器的数据直接流到 ADLS 上的 Delta 表中，并显示数据的输入与处理率。</p>
+<pre><code class="scala"># Read directly from IoT Hubs using the EventHubs library for Azure Databricks
+iot_stream = (
+    spark.readStream.format(&quot;eventhubs&quot;)                                        # Read from IoT Hubs directly
+    .options(**ehConf)                                                        # Use the Event-Hub-enabled connect string
+    .load()                                                                   # Load the data
+    .withColumn(&#39;reading&#39;, F.from_json(F.col(&#39;body&#39;).cast(&#39;string&#39;), schema)) # Extract the payload from the messages
+    .select(&#39;reading.*&#39;, F.to_date(&#39;reading.timestamp&#39;).alias(&#39;date&#39;))        # Create a &quot;date&quot; field for partitioning
+)
+
+# Split our IoT Hubs stream into separate streams and write them both into their own Delta locations
+write_turbine_to_delta = (
+    iot_stream.filter(&#39;temperature is null&#39;)                          # Filter out turbine telemetry from other streams
+    .select(&#39;date&#39;,&#39;timestamp&#39;,&#39;deviceId&#39;,&#39;rpm&#39;,&#39;angle&#39;)            # Extract the fields of interest
+    .writeStream.format(&#39;delta&#39;)                                    # Write our stream to the Delta format
+    .partitionBy(&#39;date&#39;)                                            # Partition our data by Date for performance
+    .option(&quot;checkpointLocation&quot;, ROOT_PATH + &quot;/bronze/cp/turbine&quot;) # Checkpoint so we can restart streams gracefully
+    .start(ROOT_PATH + &quot;/bronze/data/turbine_raw&quot;)                  # Stream the data into an ADLS Path
+)</code></pre>
+<p>Delta允许我们的IoT数据在IoT Hub采集后的几秒钟内被查询。</p>
+<pre><code class="sql">%sql 
+-- We can query the data directly from storage immediately as it streams into Delta 
+SELECT * FROM delta.`/tmp/iiot/bronze/data/turbine_raw` WHERE deviceid = &#39;WindTurbine-1&#39;</code></pre>
+<img src="https://i.loli.net/2020/08/16/JbG1p492CQek58I.png"  />
+
+<p>我们现在可以建立一个下游管道，丰富和聚合我们的IIoT应用数据，进行数据分析。</p>
+<h4 id="数据存储和处理：Azure-Databricks和Delta-Lake"><a href="#数据存储和处理：Azure-Databricks和Delta-Lake" class="headerlink" title="数据存储和处理：Azure Databricks和Delta Lake"></a>数据存储和处理：Azure Databricks和Delta Lake</h4><p>Delta 支持采用多跳流水线方法进行数据工程，数据质量和聚合度随着流水线的流动而提高。我们的时间序列数据将流经以下青铜级、白银级和黄金级数据。（青铜-白银-黄金 可以理解为数据成熟度的不同阶段， Bronze (raw) to Silver (aggregated) to Gold (enriched)）</p>
+<p><img src="https://i.loli.net/2020/08/16/8sgJKbticdAEpSH.png"></p>
+<p>我们从青铜到白银的管道将简单地把我们的涡轮机传感器数据汇总到1小时间隔。我们将执行一个流式MERGE命令，将汇总的记录上传到银色的Delta表中。</p>
+<p><img src="https://i.loli.net/2020/08/16/E1oZAqWFVh5fxcp.png"></p>
+<pre><code class="python"># Create functions to merge turbine and weather data into their target Delta tables
+def merge_records(incremental, target_path): 
+    incremental.createOrReplaceTempView(&quot;incremental&quot;)
+
+# MERGE consists of a target table, a source table (incremental),
+# a join key to identify matches (deviceid, time_interval), and operations to perform 
+# (UPDATE, INSERT, DELETE) when a match occurs or not
+    incremental._jdf.sparkSession().sql(f&quot;&quot;&quot;
+        MERGE INTO turbine_hourly t
+        USING incremental i
+        ON i.date=t.date AND i.deviceId = t.deviceid AND i.time_interval = t.time_interval
+        WHEN MATCHED THEN UPDATE SET *
+        WHEN NOT MATCHED THEN INSERT *
+    &quot;&quot;&quot;)
+
+
+# Perform the streaming merge into our  data stream
+turbine_stream = (
+    spark.readStream.format(&#39;delta&#39;).table(&#39;turbine_raw&#39;)        # Read data as a stream from our source Delta table
+    .groupBy(&#39;deviceId&#39;,&#39;date&#39;,F.window(&#39;timestamp&#39;,&#39;1 hour&#39;)) # Aggregate readings to hourly intervals
+    .agg(&#123;&quot;rpm&quot;:&quot;avg&quot;,&quot;angle&quot;:&quot;avg&quot;&#125;)
+    .writeStream                                                                                         
+    .foreachBatch(merge_records)                              # Pass each micro-batch to a function
+    .outputMode(&quot;update&quot;)                                     # Merge works with update mod
+    .start()
+)</code></pre>
+<p>我们从白银到黄金的管道将把这两条管道连接在一起，形成一个单一的表，用于每小时的天气和风机数据测量。</p>
+<pre><code class="python"># Read streams from Delta Silver tables
+turbine_hourly = spark.readStream.format(&#39;delta&#39;).option(&quot;ignoreChanges&quot;, True).table(&quot;turbine_hourly&quot;)
+weather_hourly = spark.readStream.format(&#39;delta&#39;).option(&quot;ignoreChanges&quot;, True).table(&quot;weather_hourly&quot;)
+
+# Perform a streaming join to enrich the data
+turbine_enriched = turbine_hourly.join(weather_hourly, [&#39;date&#39;,&#39;time_interval&#39;])
+
+# Perform a streaming merge into our Gold data stream
+merge_gold_stream = (
+    turbine_enriched.writeStream 
+    .foreachBatch(merge_records)
+    .start()
+)</code></pre>
+<p>我们可以立即查询我们的黄金级Delta表。</p>
+<p><img src="https://i.loli.net/2020/08/16/Ny9HaQ2go4sdqkc.png"></p>
+<p>数据分析Notebook里还包含一个单元格，它将生成历史每小时功率读数和日常维护日志，用于模型训练。运行该单元格将：</p>
+<ol>
+<li><p>在风机丰富表中回填一年的历史读数。</p>
+</li>
+<li><p>为power_output表中的每台风机生成历史功率读数。</p>
+</li>
+<li><p>在turbine_maintenance表中为每个风机生成历史维护日志。</p>
+</li>
+</ol>
+<p>现在，我们在Azure Data Lake上拥有丰富的就绪的人工智能(AI)数据，这些数据以高性能、可靠的格式提供给我们的数据科学建模，以优化资产利用率。</p>
+<pre><code class="sql">%sql
+-- Query all 3 tables together
+CREATE OR REPLACE VIEW gold_readings AS
+SELECT r.*, 
+    p.power, 
+    m.maintenance as maintenance
+FROM turbine_enriched r 
+    JOIN turbine_power p ON (r.date=p.date AND r.time_interval=p.time_interval AND r.deviceid=p.deviceid)
+    LEFT JOIN turbine_maintenance m ON (r.date=m.date AND r.deviceid=m.deviceid);
+
+SELECT * FROM gold_readings</code></pre>
+<p><img src="https://i.loli.net/2020/08/16/FBgumeayqjNScpv.png"></p>
+<p>我们的数据工程管道已经完成! 数据现在正从IoT Hubs流向青铜级（原始）到白银级（聚合）再到黄金级（丰富）。现在是时候对我们的数据进行一些分析了。</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>综上所述，我们已经成功完成：</p>
+<ul>
+<li><p>将现场设备的实时IIoT数据输入Azure中</p>
+</li>
+<li><p>直接在Data Lake上进行复杂的时间序列处理</p>
+</li>
+</ul>
+<p>在第三部分中，我们将探讨如何使用机器学习来最大限度地提高风力发电机的收益，同时最大限度地降低停机的机会成本。</p>
+<h2 id="第三部分"><a href="#第三部分" class="headerlink" title="第三部分"></a>第三部分</h2><p>在第二部分关于Azure数据分析系列中，我们将现场设备的实时IIoT数据摄入Azure，并直接在Data Lake上进行复杂的时间序列处理。在第三部分中，我们将利用机器学习来进行预测性维护，并在最大限度地降低停机的机会成本的同时，使风力发电机的收益最大化，从而实现利润最大化。</p>
+<p>我们的模型训练和可视化的最终结果将是一个Power BI报告，如下图所示：</p>
+<p><img src="https://i.loli.net/2020/08/22/GBaJjqK1QmvH7dz.png"></p>
+<p>再再回顾一下端到端架构，如下图所示：</p>
+<p><img src="https://i.loli.net/2020/08/22/uIF8nXelkMCSKU4.png"></p>
+<h3 id="机器学习：功率输出和剩余寿命优化"><a href="#机器学习：功率输出和剩余寿命优化" class="headerlink" title="机器学习：功率输出和剩余寿命优化"></a>机器学习：功率输出和剩余寿命优化</h3><p>优化像风力发电机这样的工业资产的实用性、寿命和运营效率具有众多的收入和成本效益。我们在本文中探讨的现实挑战是在最大限度地提高风力发电机组的收益的同时，最大限度地降低停机的机会成本，从而使我们的净利润最大化。</p>
+<blockquote>
+<p>净利润=发电收入-设备附加应变成本</p>
+</blockquote>
+<p>如果我们将风机推到更高的转速，它将产生更多的能量，从而产生更多的收入。然而，风机所承受的额外压力将导致它更频繁地发生故障，从而引入成本。为了解决这个优化问题，我们将创建两个模型：</p>
+<ol>
+<li>预测给定一组运行条件下风机的发电量</li>
+<li>预测一组运行条件下风机的剩余寿命</li>
+</ol>
+<p><img src="https://i.loli.net/2020/08/22/JhpkxEIdmBC9jSF.png"></p>
+<p>然后，我们可以制作一条利润曲线，以确定最佳的运行条件，使电力收入最大化，同时使成本最小化。</p>
+<p>使用Azure Databricks与我们的Gold Delta表，我们将运用特征工程以提取感兴趣的领域，训练两个模型，最后将模型部署到Azure机器学习进行托管。</p>
+<p><img src="https://i.loli.net/2020/08/22/v1ewRUPmQ4gBNXV.png"></p>
+<p>要计算每台风机的剩余使用寿命，我们可以使用我们的维护记录，该记录显示了每个资产的更换时间。</p>
+<pre><code class="sql">%sql
+-- Calculate the age of each turbine and the remaining life in days
+CREATE OR REPLACE VIEW turbine_age AS
+WITH reading_dates AS (SELECT distinct date, deviceid FROM turbine_power),
+    maintenance_dates AS (
+    SELECT d.*, datediff(nm.date, d.date) as datediff_next, datediff(d.date, lm.date) as datediff_last 
+    FROM reading_dates d LEFT JOIN turbine_maintenance nm ON (d.deviceid=nm.deviceid AND d.date&lt;=nm.date)
+    LEFT JOIN turbine_maintenance lm ON (d.deviceid=lm.deviceid AND d.date&gt;=lm.date ))
+SELECT date, deviceid, min(datediff_last) AS age, min(datediff_next) AS remaining_life
+FROM maintenance_dates 
+GROUP BY deviceid, date;</code></pre>
+<p>为了预测6小时时间范围内的功率输出，我们使用Spark窗口函数计算时间序列移动。</p>
+<pre><code class="sql">CREATE OR REPLACE VIEW feature_table AS
+SELECT r.*, age, remaining_life,
+    -- Calculate the power 6 hours ahead using Spark Windowing and build a feature_table to feed into our ML models
+    LEAD(power, 6, power) OVER (PARTITION BY r.deviceid ORDER BY time_interval) as power_6_hours_ahead
+FROM gold_readings r 
+JOIN turbine_age a ON (r.date=a.date AND r.deviceid=a.deviceid)
+WHERE r.date &lt; CURRENT_DATE(); -- Only train on historical data</code></pre>
+<p><img src="https://i.loli.net/2020/08/22/PMihReqNfDvQx46.png"></p>
+<p><img src="https://i.loli.net/2020/08/22/3iSyHVJu1hqXgFA.png">通过对数据的分析可以发现风机的运行参数（转速和角度）以及天气状况和6小时后的发电量之间都有很强的相关性。</p>
+<p><img src="https://i.loli.net/2020/08/22/OWPg1yw7a3lGHof.png"></p>
+<p>我们现在可以训练一个 XGBoost Regressor 模型，以使用我们的特征列（天气、传感器和功率读数）来预测我们的标签（提前六小时的功率读数）。我们可以使用Pandas UDF为每个风机并行训练一个模型，Pandas UDF将我们的XGBoost模型训练代码分发到Azure Databricks集群中的所有可用节点。</p>
+<pre><code class="python"># Create a Spark Dataframe that contains the features and labels we need
+feature_cols = [&#39;angle&#39;,&#39;rpm&#39;,&#39;temperature&#39;,&#39;humidity&#39;,&#39;windspeed&#39;,&#39;power&#39;,&#39;age&#39;]
+label_col = &#39;power_6_hours_ahead&#39;
+
+# Read in our feature table and select the columns of interest
+feature_df = spark.table(&#39;feature_table&#39;)
+
+# Create a Pandas UDF to train a XGBoost Regressor on each turbine&#39;s data
+@pandas_udf(feature_df.schema, PandasUDFType.GROUPED_MAP)
+def train_power_model(readings_pd):
+    mlflow.xgboost.autolog() # Auto-Log the XGB parameters, metrics, model and artifacts
+    with mlflow.start_run():
+    # Train an XGBRegressor on the data for this Turbine
+    alg = xgb.XGBRegressor() 
+    train_dmatrix = xgb.DMatrix(data=readings_pd[feature_cols].astype(&#39;float&#39;),label=readings_pd[label_col])
+    model = xgb.train(dtrain=train_dmatrix, evals=[(train_dmatrix, &#39;train&#39;)])
+    return readings_pd
+
+# Run the Pandas UDF against our feature dataset
+power_predictions = feature_df.groupBy(&#39;deviceid&#39;).apply(train_power_model)</code></pre>
+<p><img src="https://i.loli.net/2020/08/22/lvKCwrPpA3EUTiu.png"></p>
+<p>Azure Databricks 将通过托管的 MLflow 自动跟踪每个模型训练运行。对于 XGBoost Regression，MLflow 将跟踪任何一个参数、RMSE 指标等。例如，在设备id 是WindTurbine-18这台风机上预测功率的RMSE是45.79。</p>
+<p><img src="https://i.loli.net/2020/08/22/5X9T6hVAZHQBCt8.png"></p>
+<p>我们也对风机的剩余寿命进行类似的模型训练。其中一台风机的实际值与预测值对比如下图所示。</p>
+<p><img src="https://i.loli.net/2020/08/22/OHasrmPvpikd6U7.png"></p>
+<h3 id="模型部署和托管"><a href="#模型部署和托管" class="headerlink" title="模型部署和托管"></a>模型部署和托管</h3><p>Azure Databricks与Azure机器学习集成，用于模型部署和评分。直接在Databricks内部使用Azure ML API，我们可以通过Azure ML为每个模型自动部署镜像，并将其托管在快速、可扩展的容器服务（ACI或AKS）中。</p>
+<pre><code class="python"># Create a model image inside of AzureML
+model_image, azure_model = mlflow.azureml.build_image(model_uri=path, 
+                                                        workspace=workspace, 
+                                                        model_name=model,
+                                                        image_name=model,
+                                                        description=&quot;XGBoost model to predict power output”
+                                                        synchronous=False)
+
+# Deploy a web service to host the model as a REST API
+dev_webservice_deployment_config = AciWebservice.deploy_configuration()
+dev_webservice = Webservice.deploy_from_image(name=dev_webservice_name, 
+                                                image=model_image,                                                      
+                                                workspace=workspace)</code></pre>
+<p>模型部署完毕后，就会显示在Azure ML studio里面，我们可以进行REST API调用，对数据进行交互式评估。</p>
+<pre><code class="python"># Construct a payload to send with the request
+payload = &#123;
+    &#39;angle&#39;:12,
+    &#39;rpm&#39;:10,
+    &#39;temperature&#39;:25,
+    &#39;humidity&#39;:50,
+    &#39;windspeed&#39;:10,
+    &#39;power&#39;:200,
+    &#39;age&#39;:10
+&#125;
+
+def score_data(uri, payload):
+    rest_payload = json.dumps(&#123;&quot;data&quot;: [list(payload.values())]&#125;)
+    response = requests.post(uri, data=rest_payload, headers=&#123;&quot;Content-Type&quot;: &quot;application/json&quot;&#125;)
+    return json.loads(response.text)
+
+print(f&#39;Predicted power (in kwh) from model: &#123;score_data(power_uri, payload)&#125;&#39;)
+print(f&#39;Predicted remaining life (in days) from model: &#123;score_data(life_uri, payload)&#125;&#39;)</code></pre>
+<p>现在功率优化和RUL模型都被部署为预测服务，我们可以利用这两个模型来优化每个风力发电机的净利润。假设每千瓦时1美元，年收入可以简单地通过将每小时预期功率乘以24小时和365天来计算。年成本可以通过将每天的收入乘以涡轮机一年内需要维护的次数（365天/剩余寿命）来计算。</p>
+<p>我们只需对托管在Azure ML中的模型进行多次调用，就可以对各种运营参数进行迭代评估。通过可视化调整各种运行参数的预期利润成本，就可以确定最佳的转速以实现利润最大化。</p>
+<p><img src="https://i.loli.net/2020/08/22/8N62urRgDfXPH3i.png"></p>
+<h3 id="数据服务：Azure-Data-Explorer-ADX-和Azure-Synapse-Analytics-ASA"><a href="#数据服务：Azure-Data-Explorer-ADX-和Azure-Synapse-Analytics-ASA" class="headerlink" title="数据服务：Azure Data Explorer (ADX) 和Azure Synapse Analytics (ASA)"></a>数据服务：Azure Data Explorer (ADX) 和Azure Synapse Analytics (ASA)</h3><h4 id="ADX中的业务报告"><a href="#ADX中的业务报告" class="headerlink" title="ADX中的业务报告"></a>ADX中的业务报告</h4><p>Azure Data Explorer (ADX) 提供对流式时间序列数据的实时操作分析。IIoT设备数据可以直接从IoT Hub流式传输到ADX中，也可以使用微软的<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/data-explorer/connect-from-databricks">Kusto Spark Connector</a>从Azure Databricks推送，如下所示：</p>
+<pre><code class="python">stream_to_adx = (
+    spark.readStream.format(&#39;delta&#39;).option(&#39;ignoreChanges&#39;,True).table(&#39;turbine_enriched&#39;)
+        .writeStream.format(&quot;com.microsoft.kusto.spark.datasink.KustoSinkProvider&quot;)
+        .option(&quot;kustoCluster&quot;,kustoOptions[&quot;kustoCluster&quot;])
+        .option(&quot;kustoDatabase&quot;,kustoOptions[&quot;kustoDatabase&quot;])
+        .option(&quot;kustoTable&quot;, kustoOptions[&quot;kustoTable&quot;])
+        .option(&quot;kustoAadAppId&quot;,kustoOptions[&quot;kustoAadAppId&quot;])
+        .option(&quot;kustoAadAppSecret&quot;,kustoOptions[&quot;kustoAadAppSecret&quot;])
+        .option(&quot;kustoAadAuthorityID&quot;,kustoOptions[&quot;kustoAadAuthorityID&quot;])
+    )</code></pre>
+<p>接下来使用PowerBI连接到Kusto表，为风机工程师创建一个真正的、实时的、运行的仪表盘。Azure Data Explorer (ADX) 还包含原生的时间序列分析功能，如预测和异常检测。例如，下面的Kusto代码可以发现数据流中转速读数的异常点。</p>
+<pre><code class="python">turbine_raw
+| where rpm &gt; 0
+| make-series rpm_normal = avg(rpm) default=0 on todatetime(timestamp) in range(datetime(2020-06-30 00:00:00), datetime(2020-06-30 01:00:00), 10s)
+| extend anomalies = series_decompose_anomalies(rpm_normal, 0.5)
+| render anomalychart with(anomalycolumns=anomalies, title=&quot;RPM Anomalies&quot;)</code></pre>
+<p><img src="https://i.loli.net/2020/08/22/QyxJFBDT8Ws7N2V.png"></p>
+<h4 id="ASA中的分析报告"><a href="#ASA中的分析报告" class="headerlink" title="ASA中的分析报告"></a>ASA中的分析报告</h4><p>Azure Synapse Analytics (ASA)是Azure的下一代大数据数据仓库，它原生利用ADLS Gen 2并与Azure Databricks集成，以实现这些服务之间的无缝数据共享。</p>
+<p><img src="https://i.loli.net/2020/08/22/7PAMfvFU5yXhxro.png"></p>
+<p>在利用Synapse和Azure Databricks的功能时，推荐的方式是根据团队的要求和访问数据的用户角色，使用最适合工作的工具。例如：</p>
+<ul>
+<li>数据工程师和数据科学家倾向于使用 Azure Databricks获得Delta的性能优势，并拥有一个协作、丰富和灵活的工作空间</li>
+<li>分析师将倾向于选择 Synapse进行低代码或基于数据仓库的 SQL 环境来摄取、处理和可视化数据</li>
+</ul>
+<p>Azure Databricks的Synapse流式连接器使我们能够将（Gold级别）的读数直接流式传输到Synapse SQL池中进行开发数据报表。</p>
+<pre><code class="python">spark.conf.set(&quot;spark.databricks.sqldw.writeSemantics&quot;, &quot;copy&quot;)                           # Use COPY INTO for faster loads
+
+write_to_synapse = (
+    spark.readStream.format(&#39;delta&#39;).option(&#39;ignoreChanges&#39;,True).table(&#39;turbine_enriched&#39;) # Read in Gold turbine readings
+    .writeStream.format(&quot;com.databricks.spark.sqldw&quot;)                                     # Write to Synapse
+    .option(&quot;url&quot;,dbutils.secrets.get(&quot;iot&quot;,&quot;synapse_cs&quot;))                                # SQL Pool JDBC (SQL Auth)
+    .option(&quot;tempDir&quot;, SYNAPSE_PATH)                                                      # Temporary ADLS path
+    .option(&quot;forwardSparkAzureStorageCredentials&quot;, &quot;true&quot;)
+    .option(&quot;dbTable&quot;, &quot;turbine_enriched&quot;)                                                # Table in Synapse to write to
+    .option(&quot;checkpointLocation&quot;, CHECKPOINT_PATH+&quot;synapse&quot;)                              # Streaming checkpoint
+    .start()
+)</code></pre>
+<p>也可以使用 Azure Data Factory 从 Delta 格式读取数据，并将其写入 Synapse SQL Pools。到这里数据已被清洗干净、处理妥当，可供数据分析师进行分析报告，可以针对实时数据以及 ML 模型的预测建立一个实时 PowerBI 仪表板。</p>
+<p><video src="https://cdn.jsdelivr.net/gh/zhengr/zhengr.github.io/assets/video/PowerBI.mp4" width="800px" height="600px" controls="controls"></video></p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>综上所述，我们已经成功完成：</p>
+<ul>
+<li>将现场设备的实时IIoT数据输入Azure中</li>
+<li>直接在Data Lake上进行复杂的时间序列处理</li>
+<li>训练和部署ML模型，以优化风力发电机资产的使用</li>
+<li>向工程师提供数据，用于业务报告，向数据分析师提供分析报告</li>
+</ul>
+<p>整个方案基于Microsoft Azure来构建，当然通过AWS&amp;阿里云也可以实现，因为Delta Lake（砖厂精品）是整个方案大数据技术的关键，它将一切联系在一起。ADLS上的Delta提供了可靠的流式数据管道和对海量时间序列数据的高性能数据科学计算和分析查询。最后，它赋能组织能够真正采用Lakehouse模式，将最佳的Azure技术组件引入一次写入、多次访问的数据存储中。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2020/12/04/%E4%BC%81%E4%B8%9A%E6%9E%B6%E6%9E%84/%E9%80%9A%E8%BF%87%E4%BC%81%E4%B8%9A%E6%9E%B6%E6%9E%84%E7%AE%A1%E7%90%86%E6%96%B0%E6%8A%80%E6%9C%AF/" title="通过企业架构管理新技术"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 通过企业架构管理新技术</span></a><a class="button is-default" href="/2020/08/05/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BD%93%E7%B3%BB%E8%A6%81%E7%AE%80%E5%8D%95/" title="数据体系要简单直接，BI应该叫商业情报"><span class="has-text-weight-semibold">下一页: 数据体系要简单直接，BI应该叫商业情报</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="zhengr/robin-zheng-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/zhengr"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><a title="rss" target="_blank" rel="noopener nofollow" href="/atom.xml"><i class="iconfont icon-rss"></i></a><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Robin 2021</span></p></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

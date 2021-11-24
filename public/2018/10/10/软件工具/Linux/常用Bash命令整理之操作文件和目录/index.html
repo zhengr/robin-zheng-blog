@@ -1,0 +1,149 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>常用Bash命令整理之操作文件和目录</title><meta name="description" content="观天之道，执天之行"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Robin's blog" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Robin's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">常用Bash命令整理之操作文件和目录</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-touch-%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="toc-text">1. touch - 创建文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-mkdir-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-text">2.mkdir - 创建目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-cp-%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="toc-text">3.cp - 复制文件或目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-ln-%E9%93%BE%E6%8E%A5%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="toc-text">4.ln - 链接文件或目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-mv-%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="toc-text">5. mv - 移动文件或目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-rm-%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="toc-text">6.rm - 删除文件或目录</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Linux"><i class="tag post-item-tag">Linux</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">常用Bash命令整理之操作文件和目录</h1><time class="has-text-grey" datetime="2018-10-10T23:10:00.000Z">2018-10-10</time><article class="mt-2 post-content"><h2 id="1-touch-创建文件"><a href="#1-touch-创建文件" class="headerlink" title="1. touch - 创建文件"></a>1. touch - 创建文件</h2><p><code>touch</code>命令就可用于创建、变更和修改文件的时间戳。它是 Linux 操作系统的标准程序。<code>touch</code>命令又如下选项：</p>
+<pre><code class="bash">-a: 只改变访问时间 
+-c: 不创建任何文件
+-m: 只改变修改时间
+-r: 使用指定文件的时间替代当前时间
+-t: 使用 [[CC]YY]MMDDhhmm[.ss] 替代当前时间</code></pre>
+<p>touch 命令的常见用法如下：</p>
+<pre><code class="bash"># 创建一个名为 effyl 的新空文件
+touch effyl
+
+# 同时创建名称分别为 effyl myeffyl lueffyl 的三个文件
+touch effyl myeffyl lueffyl
+
+# 使用 -a 选项，可以改变或更新文件的最新访问时间，如果文件 effyl 不存在，则新创建一个
+touch -a effyl
+
+# 使用 -c 选项，可以避免创建一个新文件，并用当前时间更新文件的时间戳
+touch -c effyl
+
+# 使用 -m 选项，可以只改变文件的修改时间，而访问时间不变
+touch -m effyl
+
+# 使用 -c 和 -t 选项，来明确设置文件的时间
+touch -c -t YYMMDDHHMM filename
+
+# 如果想使用文件 myeffyl 的时间戳更新文件 effyl 的时间戳，可以使用 -r 选项
+touch -r myeffyl effyl</code></pre>
+<h2 id="2-mkdir-创建目录"><a href="#2-mkdir-创建目录" class="headerlink" title="2.mkdir - 创建目录"></a>2.mkdir - 创建目录</h2><p><code>mkdir</code>命令用于创建一个新目录。最基本的<code>mkdir</code>命令的使用方法如下所示：</p>
+<pre><code class="bash"># 在当前目录下创建一个给定的目录名
+mkdir &lt;dirname&gt;
+
+# 在 backup 中的相对路径创建一个名为 old 的目录
+mkdir backup/old
+
+# 在 backup 中的绝对路径中创建一个名为 old 的目录
+mkdir /home/blinkfox/backup/old
+
+# 使用 -p 选项，会自动创建所有还不存在的父目录
+mkdir -p backup/old
+
+# 使用 -m 选项，可以设置将要创建目录的权限
+# 如：创建一个任何人都有读写访问权限的目录
+mkdir -p -m 777 backup/old</code></pre>
+<h2 id="3-cp-复制文件或目录"><a href="#3-cp-复制文件或目录" class="headerlink" title="3.cp - 复制文件或目录"></a>3.cp - 复制文件或目录</h2><p><code>cp</code>命令用于将文件从一个地方复制到另一个地方。原来的文件保持不变，新文件可能保持原名或用一个不同的名字。</p>
+<p>使用 cp 命令复制文件和目录的语法有以下几种：</p>
+<pre><code class="bash"># 复制源文件到目标文件
+cp [OPTION] SOURCE DEST
+
+# 复制一个或多个源文件到一个目录
+cp [OPTION] SOURCE... DIRECTORY
+
+# 同上
+cp [OPTION] -t DIRECTORY SOURCE... </code></pre>
+<p>常用使用示例如下：</p>
+<pre><code class="bash"># 在当前目录下，创建一个文件 file.txt 的副本，取名为 newfile.txt
+cp file.txt newfile.txt
+
+# 复制当前目录下的 file.txt 文件到 /tmp 目录下
+cp file.txt /tmp
+
+# 复制当前目录下的所有文件到 /tmp 目录下
+cp * /tmp
+
+# 使用 -p 选项，可以使复制一个文件到新文件时，保留源文件的所有者、权限等信息
+cp -p filename /path/to/new/location/myfile
+
+# 使用 -R 或 -r 选项，恶意递归地复制一个目录
+# 即将一个目录及其下的所有文件和子目录都复制到另一个目录
+cp -R * /home/blinkfox/backup</code></pre>
+<h2 id="4-ln-链接文件或目录"><a href="#4-ln-链接文件或目录" class="headerlink" title="4.ln - 链接文件或目录"></a>4.ln - 链接文件或目录</h2><p><code>ln</code>命令用于创建软链接或硬链接。使用 -s 选项，可以创建一个软链接：</p>
+<pre><code class="bash"># 在目录 lib 下创建一个软链接 library.so，链接到 /home/blinkfox/src/library.so
+ln -s /home/blinkfox/src/library.so /home/blinkfox/lib
+
+# 创建目录的软链接
+ln -s /home/blinkfox/src source</code></pre>
+<h2 id="5-mv-移动文件或目录"><a href="#5-mv-移动文件或目录" class="headerlink" title="5. mv - 移动文件或目录"></a>5. mv - 移动文件或目录</h2><p><code>mv</code>命令用于将文件和目录从一个位置移到另外一个位置。除了移动文件，<code>mv</code>命令还可用于修改文件或目录的名字。</p>
+<p>mv 命令的基本语法如下所示：</p>
+<pre><code class="bash">mv SOURCE... DIRECTORY</code></pre>
+<p>常用命令如下：</p>
+<pre><code class="bash"># 将当前目录下的文件 source.txt 移到目录 /tmp 下
+mv source.txt /tmp
+
+# 将目录 dir1、dir2 移到目录 dir_dist 下
+mv dir1 dir2 dir_dist
+
+# 将当前目录下的 old.txt 文件更名为 new.txt
+mv old.txt new.txt
+
+# 使用 -i 选项，在重写覆盖目标文件或目录之前给出提示信息
+mv -i old.txt new.txt
+
+# 将当前目录下的所有文件移动到目录 /tmp 下
+mv * /tmp/
+
+# 使用 -i 选项，从 dir1 中移动那些在目标目录中不存在的文件到目标目录
+mv -u dir1/* dir2/</code></pre>
+<h2 id="6-rm-删除文件或目录"><a href="#6-rm-删除文件或目录" class="headerlink" title="6.rm - 删除文件或目录"></a>6.rm - 删除文件或目录</h2><p><code>rm</code>命令用于删除指定的文件和目录。其语法如下所示：</p>
+<pre><code class="bash">rm [OPTIONS]... FILE...</code></pre>
+<p><code>rm</code>的常用命令如下：</p>
+<pre><code class="bash"># 删除当前目录下的文件 file1.txt、file2.txt、file3.txt
+rm file1.txt file2.txt file3.txt
+
+# 删除当前目录下的所有文件
+rm *
+
+# 删除你当前帐号主目录下的 temp 目录中的所有文件
+rm ~/temp/*
+
+# 使用 -i 选项，可以在删除每个文件或目录前提示用户确认
+rm -i *
+
+# 删除当前目录下所有以&quot;.doc&quot;结尾的文件
+rm *.doc
+
+# 删除当前目录下所有文件名中包含&quot;movie&quot;字符串的文件
+rm *movie*
+
+# 删除当前目录下所有以&quot;a&quot;开头的文件
+rm a*
+
+# 删除当前目录下整个文件名（包括扩展名）只有 3 个字符的所有文件
+rm ???
+
+# 删除当前目录下文件扩展名有两个字符的所有文件
+rm *.??
+
+# 删除当前目录下文件名中含有字母 a 或 b 或 c 的所有文件
+rm *[abc]*
+
+# 删除当前目录下文件名中包含 0~9 的所有文件
+rm *[0-9]*
+
+# 删除当前目录下文件扩展名是字母 c 或 h 的所有文件
+rm *.[ch]
+
+# 删除 /tmp 目录下的所有文件及其子目录
+rm -rf /tmp/*</code></pre>
+<blockquote>
+<p>-f 删除前不提示用户确认，并忽略不存在的文件</p>
+</blockquote>
+<blockquote>
+<p>-r 递归地删除目录及其下的内容</p>
+</blockquote>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2018/10/11/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Linux/%E5%B8%B8%E7%94%A8Bash%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86%E4%B9%8B%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/" title="常用Bash命令整理之文本处理"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 常用Bash命令整理之文本处理</span></a><a class="button is-default" href="/2018/10/09/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/Linux/%E5%B8%B8%E7%94%A8Bash%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86%E4%B9%8B%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/" title="常用Bash命令整理之查看文件和目录"><span class="has-text-weight-semibold">下一页: 常用Bash命令整理之查看文件和目录</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="zhengr/robin-zheng-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/zhengr"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><a title="rss" target="_blank" rel="noopener nofollow" href="/atom.xml"><i class="iconfont icon-rss"></i></a><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Robin 2021</span></p></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
