@@ -29,7 +29,7 @@ user:
 # API config: https://utteranc.es/
 comment_utteranc:
   enable: true
-  repo: zhengr/Claudia-theme-blog # your blog repo
+  repo: zhengr/robin-zheng-blog # your blog repo
 
 # dark
 # light
