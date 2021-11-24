@@ -19,4 +19,4 @@ jobs:
         with:
           CLEAN: true
           BRANCH: gh-pages
-          FOLDER: .
+          FOLDER: docs
