@@ -15,8 +15,8 @@ jobs:
       - run: npm ci
       - run: hexo generate
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.6
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           CLEAN: true
           BRANCH: gh-pages
-          FOLDER: docs/
+          FOLDER: /
