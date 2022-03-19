@@ -10,7 +10,7 @@ jobs:
   build-deploy:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: npm install hexo-cli -g
       - run: npx -p npm@6 npm ci
       - run: hexo generate
