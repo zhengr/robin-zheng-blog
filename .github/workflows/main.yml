@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install hexo-cli -g
-      - run: npx -p npm@6 npm ci
+      - run: npx -p npm@6 npm ci --legacy-peer-deps
       - run: hexo generate
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
