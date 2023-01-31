@@ -11,10 +11,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-            node-version: '12'
+          node-version: '12.x'
+      - name: Install dependencies
       - run: npm install hexo-cli -g
-      - run: npm ci --legacy-peer-deps
+      - run: npx -p npm@6 npm ci
       - run: hexo generate
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
