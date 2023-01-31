@@ -8,13 +8,13 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: macos-10.15
+    runs-on: macos-10.13.6
     steps:
       - uses: actions/checkout@v3
         with:
-            node-version: '14'
+            node-version: '12'
       - run: npm install hexo-cli -g
-      - run: npx -p npm@6 npm ci --legacy-peer-deps
+      - run: npm ci --legacy-peer-deps
       - run: hexo generate
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
