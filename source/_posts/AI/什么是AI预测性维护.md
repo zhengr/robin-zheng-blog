@@ -1,13 +1,11 @@
 ---
 title: 预测性维护：工业 4.0下人工智能如何改变机器设备维护方式
-date: 2023-01-31 00:00:00
+date: 2023-01-20 00:00:00
 author: 郑瑞(robin RUI ZHENG)
 categories: AI
 tags:
   - AI
 ---
-
-# 预测性维护：工业 4.0下人工智能如何改变机器设备维护方式
 
 ![](https://s2.loli.net/2022/06/05/XHWQn4OykJPV2lq.png)
 

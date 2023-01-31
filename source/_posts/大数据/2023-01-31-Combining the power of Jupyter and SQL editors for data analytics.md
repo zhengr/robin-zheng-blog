@@ -1,6 +1,6 @@
 ---
 title: 结合Jupyter和SQL编辑器的力量进行数据分析
-date: 2023-01-31 00:00:00
+date: 2023-01-10 00:00:00
 author: robin zheng
 cover: true
 categories: 大数据
